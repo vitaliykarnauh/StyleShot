@@ -1,5 +1,6 @@
 package com.checkdoc.config;
 
+import com.checkdoc.domain.User;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class DBConfig {
     public SessionFactory getSessionFactory(DataSource dataSource) {
         LocalSessionFactoryBuilder localSessionFactoryBuilder = new LocalSessionFactoryBuilder(
                 dataSource);
+        localSessionFactoryBuilder.addAnnotatedClasses(new Class[]{User.class});
         localSessionFactoryBuilder.addProperties(getHibernateProperties());
         localSessionFactoryBuilder.scanPackages("com.checkdoc.domain");
         return localSessionFactoryBuilder.buildSessionFactory();
