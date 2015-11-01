@@ -4,9 +4,7 @@ package com.checkdoc.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "USER")
@@ -17,7 +15,7 @@ public class User {
     @GeneratedValue(generator = "identity")
     @GenericGenerator(name = "identity", strategy = "identity")
     @Column(name = "USER_ID", unique = true, nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name = "USER_NAME")
     private String userName;
@@ -25,11 +23,11 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ROLE_ID")
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Directory> directories = new HashSet<>();
 
     public User() {
@@ -74,6 +72,14 @@ public class User {
         this.role = role;
     }
 
+    public Set<Directory> getDirectories() {
+        return directories;
+    }
+
+    public void setDirectories(Set<Directory> directories) {
+        this.directories = directories;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,5 +101,16 @@ public class User {
         result = 31 * result + getEmail().hashCode();
         result = 31 * result + getRole().hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "directories=" + directories +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

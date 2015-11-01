@@ -1,6 +1,11 @@
 package com.checkdoc.config;
 
+import com.checkdoc.dao.*;
+import com.checkdoc.dao.impl.*;
+import com.checkdoc.domain.MistakeType;
 import com.checkdoc.domain.User;
+import com.checkdoc.service.*;
+import com.checkdoc.service.impl.*;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,5 +79,69 @@ public class DBConfig {
         hibernateTransactionManager.setSessionFactory(sessionFactory);
         return hibernateTransactionManager;
     }
+
+
+    @Bean(name = "userDao")
+    public UserDao getUserDao() {
+        return new UserDaoImpl();
+    }
+
+    @Bean(name = "roleDao")
+    public RoleDao getRoleDao() {
+        return new RoleDaoImpl();
+    }
+
+    @Bean(name = "directoryDao")
+    public DirectoryDao getDirectoryDao() {
+        return new DirectoryDaoImpl();
+    }
+
+    @Bean(name = "documentDao")
+    public DocumentDao getDocumentDao() {
+        return new DocumentDaoImpl();
+    }
+
+    @Bean(name = "mistakeDao")
+    public MistakeDao getMistakeDao() {
+        return new MistakeDaoImpl();
+    }
+
+    @Bean(name = "mistakeTypeDao")
+    public MistakeTypeDao getMistakeTypeDao() {
+        return new MistakeTypeDaoImpl();
+    }
+
+    @Bean(name = "userService")
+    public UserService getUserService() {
+        return new UserServiceImpl();
+    }
+
+    @Bean(name = "roleService")
+    public RoleService getRoleService() {
+        return new RoleServiceImpl();
+    }
+
+    @Bean(name = "directoryService")
+    public DirectoryService getDirectoryService() {
+        return new DirectoryServiceImpl();
+    }
+
+    @Bean(name = "documentService")
+    public DocumentService getDocumentService() {
+        return new DocumentServiceImpl();
+    }
+
+    @Bean(name = "mistakeService")
+    public MistakeService getMistakeService() {
+        return new MistakeServiceImpl();
+    }
+
+    @Bean(name = "mistakeTypeService")
+    public MistakeTypeService getMistakeTypeService() {
+        return new MistakeTypeServiceImpl();
+    }
+
+
 }
+
 

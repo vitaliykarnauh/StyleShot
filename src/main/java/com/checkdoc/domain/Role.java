@@ -21,7 +21,7 @@ public class Role {
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<>();
 
     public Role() {
@@ -44,7 +44,7 @@ public class Role {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
