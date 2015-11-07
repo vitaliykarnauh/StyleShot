@@ -9,76 +9,81 @@ import javax.persistence.*;
 @Table(name = "MISTAKE")
 public class Mistake {
 
-    @Id
-    @GeneratedValue(generator = "identity")
-    @GenericGenerator(name = "identity", strategy = "identity")
-    @Column(name = "MISTAKE_ID", unique = true, nullable = false)
-    private Long id;
+	@Id
+	@GeneratedValue(generator = "identity")
+	@GenericGenerator(name = "identity", strategy = "identity")
+	@Column(name = "MISTAKE_ID", unique = true, nullable = false)
+	private Long id;
 
-    @Column(name = "NAME")
-    private String name;
+	@Column(name = "TEXT")
+	private String text;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "DOCUMENT_ID")
-    private Document document;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "DOCUMENT_ID")
+	private Document document;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "MISTAKE_TYPE_ID")
-    private MistakeType mistakeType;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "MISTAKE_TYPE_ID")
+	private MistakeType mistakeType;
 
-    public Mistake() {
-    }
+	public Mistake(String text, Document document, MistakeType mistakeType) {
+		this.text = text;
+		this.document = document;
+		this.mistakeType = mistakeType;
+	}
 
-    public Mistake(String name) {
-        this.name = name;
-    }
+	public Mistake() {
 
-    public Mistake(String name, Document document) {
+	}
 
-        this.name = name;
-        this.document = document;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public String getName() {
-        return name;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Mistake)) return false;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+		Mistake mistake = (Mistake) o;
 
-    public Document getDocument() {
-        return document;
-    }
+		if (!getId().equals(mistake.getId())) return false;
+		if (!text.equals(mistake.text)) return false;
+		if (!getDocument().equals(mistake.getDocument())) return false;
+		return getMistakeType().equals(mistake.getMistakeType());
 
-    public void setDocument(Document document) {
-        this.document = document;
-    }
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	@Override
+	public int hashCode() {
+		int result = getId().hashCode();
+		result = 31 * result + text.hashCode();
+		result = 31 * result + getDocument().hashCode();
+		result = 31 * result + getMistakeType().hashCode();
+		return result;
+	}
 
-        Mistake mistake = (Mistake) o;
+	public Long getId() {
+		return id;
+	}
 
-        if (getId() != mistake.getId()) return false;
-        if (!getName().equals(mistake.getName())) return false;
-        if (!getDocument().equals(mistake.getDocument())) return false;
-        return mistakeType.equals(mistake.mistakeType);
+	public Document getDocument() {
+		return document;
+	}
 
-    }
+	public void setDocument(Document document) {
+		this.document = document;
+	}
 
-    @Override
-    public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getName().hashCode();
-        result = 31 * result + getDocument().hashCode();
-        result = 31 * result + mistakeType.hashCode();
-        return result;
-    }
+	public MistakeType getMistakeType() {
+		return mistakeType;
+	}
+
+	public void setMistakeType(MistakeType mistakeType) {
+		this.mistakeType = mistakeType;
+	}
 }

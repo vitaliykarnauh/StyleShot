@@ -4,4 +4,6 @@ import com.checkdoc.domain.MistakeType;
 import com.googlecode.genericdao.dao.hibernate.GenericDAO;
 
 public interface MistakeTypeDao extends GenericDAO<MistakeType, Long> {
+
+	MistakeType findByMistakeTypeName(String name);
 }

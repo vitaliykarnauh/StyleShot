@@ -6,13 +6,15 @@ import java.util.List;
 
 public interface MistakeTypeService {
 
-    void add(MistakeType mistakeType);
+	void add(MistakeType mistakeType);
 
-    void update(MistakeType mistakeType);
+	void update(MistakeType mistakeType);
 
-    void delete(MistakeType mistakeType);
+	void delete(MistakeType mistakeType);
 
-    MistakeType findMistakeTypeById(Long id);
+	MistakeType findMistakeTypeByName(String name);
 
-    List<MistakeType> getAllMistakeTypes();
+	MistakeType findMistakeTypeById(Long id);
+
+	List<MistakeType> getAllMistakeTypes();
 }
