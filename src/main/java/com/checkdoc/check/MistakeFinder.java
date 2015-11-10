@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +25,8 @@ import java.util.Objects;
  * @version 1.0 4.11.2015
  */
 public class MistakeFinder {
+
+	private List<Mistake> mistakes;
 
 	private Document document;
 
@@ -42,14 +45,18 @@ public class MistakeFinder {
 		this.rule = rule;
 		factory = new MistakeTypeFactory();
 		mistakeService = new MistakeServiceImpl();
+		mistakes = new ArrayList<>();
 	}
 
 	/**
 	 * Checks document on mistakes.
 	 * It includes other methods, each of them checks according to rule
+	 *
+	 * @return List of mistakes in this call of check method
 	 */
-	public void check() {
+	public List<Mistake> check() {
 		File directory;
+		mistakes = new ArrayList<>();
 		FileInputStream fis = null;
 		XWPFDocument documentDocx;
 		XWPFParagraph paragraph;
@@ -87,11 +94,11 @@ public class MistakeFinder {
 				}
 				fis.close();
 			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
-//		} catch (Docx4JException e) {
-//			e.printStackTrace();
 		}
+		return mistakes;
 	}
 
 	/**
@@ -106,6 +113,7 @@ public class MistakeFinder {
 			MistakeType type = factory.getMistakeType(MistakeTypeEnum.FONT_MISTAKE);
 			Mistake mistake = new Mistake(sentences.toString(), document, type);
 			mistakeService.add(mistake);
+			mistakes.add(mistake);
 		}
 	}
 
@@ -121,6 +129,7 @@ public class MistakeFinder {
 				MistakeType type = factory.getMistakeType(MistakeTypeEnum.FONT_SIZE_MISTAKE);
 				Mistake mistake = new Mistake(sentences.toString(), document, type);
 				mistakeService.add(mistake);
+				mistakes.add(mistake);
 			}
 		}
 	}
@@ -139,6 +148,7 @@ public class MistakeFinder {
 					MistakeType type = factory.getMistakeType(MistakeTypeEnum.INTEND_SIZE_MISTAKE);
 					Mistake mistake = new Mistake(null, document, type);
 					mistakeService.add(mistake);
+					mistakes.add(mistake);
 				}
 			}
 		}
