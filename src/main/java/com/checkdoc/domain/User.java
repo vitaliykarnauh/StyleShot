@@ -23,6 +23,17 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Column(name = "PASSWORD")
+    private String password;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ROLE_ID")
     private Role role;
