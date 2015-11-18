@@ -4,7 +4,6 @@ import com.checkdoc.domain.Document;
 import com.checkdoc.domain.Mistake;
 import com.checkdoc.domain.MistakeType;
 import com.checkdoc.service.MistakeService;
-import com.checkdoc.service.impl.MistakeServiceImpl;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -40,11 +39,11 @@ public class MistakeFinder {
 	 * @param rule     Rules to check document
 	 * @param document Document to check
 	 */
-	public MistakeFinder(Document document, Rule rule) {
+	public MistakeFinder(Document document, Rule rule, MistakeService mistakeService) {
 		this.document = document;
 		this.rule = rule;
 		factory = new MistakeTypeFactory();
-		mistakeService = new MistakeServiceImpl();
+		this.mistakeService = mistakeService;
 		mistakes = new ArrayList<>();
 	}
 
@@ -62,7 +61,9 @@ public class MistakeFinder {
 		XWPFParagraph paragraph;
 		List<XWPFParagraph> paraList;
 		Iterator<XWPFParagraph> paraIter;
-		String savePath = document.getUrl();
+		/** Path of file to check*/
+		String savePath = document.getDirectory().getUrl();
+		savePath += "/" + document.getUrl();
 		try {
 			directory = new File(savePath);
 			if (!directory.exists()) {
