@@ -1,10 +1,11 @@
 package com.checkdoc.util;
 
-import com.checkdoc.domain.Directory;
-import com.checkdoc.domain.Document;
-import com.checkdoc.domain.Role;
-import com.checkdoc.domain.User;
+import com.checkdoc.check.MistakeFinder;
+import com.checkdoc.check.Rule;
+import com.checkdoc.domain.*;
 import com.checkdoc.service.DirectoryService;
+import com.checkdoc.service.MistakeService;
+import com.checkdoc.service.MistakeTypeService;
 import com.checkdoc.service.UserService;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.List;
 
 public final class FileUtil {
 
@@ -45,6 +47,11 @@ public final class FileUtil {
         File file = createFile(mFile, filePath);
 
         return new Document(filePath, getCreationTime(file), directory);
+    }
+
+    public static List<Mistake> findMistakes(Document document, Rule rule, MistakeService mistakeService){
+        MistakeFinder mf = new MistakeFinder(document, rule, mistakeService);
+        return mf.check();
     }
 
     private static File createFile(MultipartFile mFile, String filePath) {

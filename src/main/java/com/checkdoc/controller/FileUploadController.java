@@ -1,9 +1,8 @@
 package com.checkdoc.controller;
 
+import com.checkdoc.check.Rule;
 import com.checkdoc.domain.Document;
-import com.checkdoc.service.DirectoryService;
-import com.checkdoc.service.DocumentService;
-import com.checkdoc.service.UserService;
+import com.checkdoc.service.*;
 import com.checkdoc.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,10 @@ public class FileUploadController {
     @Autowired
     private DirectoryService directoryService;
     @Autowired
+    private MistakeService mistakeService;
+    @Autowired
+    private MistakeTypeService mistakeTypeService;
+    @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -31,6 +34,9 @@ public class FileUploadController {
                 if (documentService.findDocumentByUrl(document.getUrl()) == null) {
                     documentService.add(document);
                 }
+                //rule mock
+                Rule rule = new Rule("Times New Roman", 14, 2L);
+                System.out.println("Mistakes found ==> " + FileUtil.findMistakes(document, rule, mistakeService));
                 System.out.println("You successfully uploaded " + file.getOriginalFilename() + "!");
             } catch (Exception e) {
                 e.printStackTrace();
