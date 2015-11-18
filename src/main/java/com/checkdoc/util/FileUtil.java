@@ -43,21 +43,22 @@ public final class FileUtil {
             System.out.println("Adding new directory...");
         }
 
-        String filePath = directory.getUrl() + "\\" + mFile.getOriginalFilename();
+        String fileName = mFile.getOriginalFilename();
+        String filePath = directory.getUrl() + "\\" + fileName.substring(fileName.lastIndexOf('\\') + 1, fileName.length());
         File file = createFile(mFile, filePath);
 
         return new Document(filePath, getCreationTime(file), directory);
     }
 
-    public static List<Mistake> findMistakes(Document document, Rule rule, MistakeService mistakeService){
+    public static List<Mistake> findMistakes(Document document, Rule rule, MistakeService mistakeService) {
         MistakeFinder mf = new MistakeFinder(document, rule, mistakeService);
         return mf.check();
     }
 
     private static File createFile(MultipartFile mFile, String filePath) {
         File file = new File(filePath);
-
         String ext = getExtension(file.getName());
+
         if (!(ext.equalsIgnoreCase("docx") || ext.equalsIgnoreCase("doc"))) {
             throw new IllegalArgumentException("Only doc/docx files allowed.");
         }
