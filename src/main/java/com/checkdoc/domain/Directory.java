@@ -100,4 +100,12 @@ public class Directory {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return "Directory{" +
+                "url='" + url + '\'' +
+                ", date=" + date +
+                ", user=" + user +
+                '}';
+    }
 }

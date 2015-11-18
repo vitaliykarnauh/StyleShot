@@ -117,7 +117,6 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "directories=" + directories +
                 ", role=" + role +
                 ", email='" + email + '\'' +
                 ", userName='" + userName + '\'' +

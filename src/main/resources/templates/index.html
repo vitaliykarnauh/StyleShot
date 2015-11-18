@@ -67,18 +67,20 @@
 						<span class="input-group-btn">
 							<!-- image-preview-clear button -->
 							<button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span class="glyphicon glyphicon-remove"></span> Очистить </button>
-							<!-- image-preview-input -->
-							<div class="btn btn-default image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> 	<span class="image-preview-input-title">Выбрать файл</span>
-								<input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
+								<form action="/upload" method="post" enctype="multipart/form-data">
+									<!-- image-preview-input -->
+									<div class="btn btn-default image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> 	<span class="image-preview-input-title">Выбрать файл</span>
+									<input type="file" name="file"/>
 							<!-- rename it -->
 							</div>
-							<button type="button" class="btn btn-labeled btn-default"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Загрузить</button>
+							<button type="submit" class="btn btn-labeled btn-default"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Загрузить</button>
+							</form>
 						</span>
 					</div>
 					<!-- /input-group image-preview [TO HERE]-->
-				
+
 					<br />
-					
+
 					<!-- Drop Zone -->
 					<div class="upload-drop-zone" id="drop-zone"> Перетащите документ </div>
 					<br />

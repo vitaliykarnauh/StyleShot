@@ -87,4 +87,12 @@ public class MistakeType {
         result = 31 * result + (getDefinition() != null ? getDefinition().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "MistakeType{" +
+                "name='" + name + '\'' +
+                ", definition='" + definition + '\'' +
+                '}';
+    }
 }

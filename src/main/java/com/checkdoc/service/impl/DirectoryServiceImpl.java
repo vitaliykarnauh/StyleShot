@@ -28,7 +28,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 
     @Override
     public void delete(Directory directory) {
-      directoryDao.remove(directory);
+        directoryDao.remove(directory);
     }
 
     @Override
@@ -39,5 +39,10 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Override
     public List<Directory> getAllDirectories() {
         return directoryDao.findAll();
+    }
+
+    @Override
+    public Directory findDirectoryByUrl(String url) {
+        return directoryDao.findDirectoryByUrl(url);
     }
 }

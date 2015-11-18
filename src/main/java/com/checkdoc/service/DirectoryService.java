@@ -16,4 +16,7 @@ public interface DirectoryService {
     Directory findDirectoryById(Long id);
 
     List<Directory> getAllDirectories();
+
+    Directory findDirectoryByUrl(String url);
+
 }

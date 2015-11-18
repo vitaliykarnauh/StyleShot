@@ -86,4 +86,13 @@ public class Mistake {
 	public void setMistakeType(MistakeType mistakeType) {
 		this.mistakeType = mistakeType;
 	}
+
+	@Override
+	public String toString() {
+		return "Mistake{" +
+				"text='" + text + '\'' +
+				", document=" + document +
+				", mistakeType=" + mistakeType +
+				'}';
+	}
 }

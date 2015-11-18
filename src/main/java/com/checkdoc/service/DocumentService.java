@@ -15,4 +15,6 @@ public interface DocumentService {
     Document findDocumentById(Long id);
 
     List<Document> getAllDocuments();
+
+    Document findDocumentByUrl(String url);
 }

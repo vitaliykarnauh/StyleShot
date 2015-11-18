@@ -99,7 +99,7 @@ public class Document {
         int result = (int) (getId() ^ (getId() >>> 32));
         result = 31 * result + getUrl().hashCode();
         result = 31 * result + getDate().hashCode();
-        result = 31 * result + getDirectory().hashCode();
+//        result = 31 * result + getDirectory().hashCode();
         return result;
     }
 
@@ -112,4 +112,12 @@ public class Document {
         this.directory = directory;
     }
 
+    @Override
+    public String toString() {
+        return "Document{" +
+                "url='" + url + '\'' +
+                ", date=" + date +
+                ", directory=" + directory +
+                '}';
+    }
 }

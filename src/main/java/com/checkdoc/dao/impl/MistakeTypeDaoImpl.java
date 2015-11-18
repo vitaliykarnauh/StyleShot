@@ -2,7 +2,6 @@ package com.checkdoc.dao.impl;
 
 import com.checkdoc.dao.MistakeTypeDao;
 import com.checkdoc.domain.MistakeType;
-import com.checkdoc.domain.User;
 import com.googlecode.genericdao.dao.hibernate.GenericDAOImpl;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -26,7 +25,7 @@ public class MistakeTypeDaoImpl extends GenericDAOImpl<MistakeType, Long> implem
 
 	@Override
 	public MistakeType findByMistakeTypeName(String name) {
-		Criteria criteria = getSession().createCriteria(User.class);
+		Criteria criteria = getSession().createCriteria(MistakeType.class);
 		criteria.add(eq("name", name));
 		return (MistakeType) criteria.uniqueResult();
 	}

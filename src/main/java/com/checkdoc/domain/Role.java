@@ -77,7 +77,14 @@ public class Role {
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));
         result = 31 * result + getName().hashCode();
-        result = 31 * result + (getUsers() != null ? getUsers().hashCode() : 0);
+        //result = 31 * result + (getUsers() != null ? getUsers().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

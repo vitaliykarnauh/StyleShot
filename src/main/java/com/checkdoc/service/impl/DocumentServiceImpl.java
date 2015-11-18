@@ -4,9 +4,13 @@ import com.checkdoc.dao.DocumentDao;
 import com.checkdoc.domain.Document;
 import com.checkdoc.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Service
+@Transactional
 public class DocumentServiceImpl implements DocumentService {
 
     @Autowired
@@ -36,5 +40,10 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public List<Document> getAllDocuments() {
         return documentDao.findAll();
+    }
+
+    @Override
+    public Document findDocumentByUrl(String url) {
+        return documentDao.findDocumentByUrl(url);
     }
 }
