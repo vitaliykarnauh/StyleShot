@@ -66,7 +66,7 @@ public class MistakeFinder {
 		List<XWPFParagraph> paraList;
 		Iterator<XWPFParagraph> paraIter;
 		/** Path of file to check*/
-		String savePath = "temp/documents/1/Test.docx";            //document.getUrl();
+		String savePath = document.getUrl();
 		try {
 			directory = new File(savePath);
 			fis = new FileInputStream(directory);
