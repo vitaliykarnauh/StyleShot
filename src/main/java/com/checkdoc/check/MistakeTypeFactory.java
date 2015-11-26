@@ -2,7 +2,6 @@ package com.checkdoc.check;
 
 import com.checkdoc.domain.MistakeType;
 import com.checkdoc.service.MistakeTypeService;
-import com.checkdoc.service.impl.MistakeTypeServiceImpl;
 
 /**
  * Factory of MistakeType which retrieves them from DB
@@ -14,9 +13,8 @@ public class MistakeTypeFactory {
 
 	private MistakeTypeService mistakeTypeService;
 
-
-	public MistakeTypeFactory() {
-		mistakeTypeService = new MistakeTypeServiceImpl();
+	public MistakeTypeFactory(MistakeTypeService mistakeTypeService) {
+		this.mistakeTypeService = mistakeTypeService;
 	}
 
 	public MistakeType getMistakeType(MistakeTypeEnum typeEnum) {

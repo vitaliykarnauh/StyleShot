@@ -4,6 +4,7 @@ import com.checkdoc.domain.Document;
 import com.checkdoc.domain.Mistake;
 import com.checkdoc.domain.MistakeType;
 import com.checkdoc.service.MistakeService;
+import com.checkdoc.service.MistakeTypeService;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -31,7 +32,9 @@ public class MistakeFinder {
 
 	private Rule rule;
 
-	private MistakeTypeFactory factory;
+	private MistakeTypeService mistakeTypeService;
+
+	private MistakeTypeFactory typeFactory;
 
 	private MistakeService mistakeService;
 
@@ -39,10 +42,11 @@ public class MistakeFinder {
 	 * @param rule     Rules to check document
 	 * @param document Document to check
 	 */
-	public MistakeFinder(Document document, Rule rule, MistakeService mistakeService) {
+	public MistakeFinder(Document document, Rule rule, MistakeService mistakeService, MistakeTypeService mistakeTypeService) {
 		this.document = document;
 		this.rule = rule;
-		factory = new MistakeTypeFactory();
+		this.mistakeTypeService = mistakeTypeService;
+		this.typeFactory = new MistakeTypeFactory(mistakeTypeService);
 		this.mistakeService = mistakeService;
 		mistakes = new ArrayList<>();
 	}
@@ -62,39 +66,37 @@ public class MistakeFinder {
 		List<XWPFParagraph> paraList;
 		Iterator<XWPFParagraph> paraIter;
 		/** Path of file to check*/
-		String savePath = document.getDirectory().getUrl();
-		savePath += "/" + document.getUrl();
+		String savePath = "temp/documents/1/Test.docx";            //document.getUrl();
 		try {
 			directory = new File(savePath);
-			if (!directory.exists()) {
+			fis = new FileInputStream(directory);
+			/*if (!directory.exists()) {
 				directory.mkdirs();
 			}
 			File[] files = directory.listFiles();
 			if (files != null) {
 				fis = new FileInputStream(files[0]);
 			}
+*/
+			documentDocx = new XWPFDocument(fis);
+			paraList = documentDocx.getParagraphs();
+			paraIter = paraList.iterator();
 
-			if (fis != null) {
-				documentDocx = new XWPFDocument(fis);
-				paraList = documentDocx.getParagraphs();
-				paraIter = paraList.iterator();
+			/** Here we add methods with logic of check*/
+//			checkIntendSize(documentDocx);
 
-				/** Here we add methods with logic of check*/
-				checkIntendSize(documentDocx);
+			while (paraIter.hasNext()) {
+				paragraph = paraIter.next();
+				List<XWPFRun> runsList = paragraph.getRuns();
+				// iterate through runs
+				for (XWPFRun run : runsList) {
 
-				while (paraIter.hasNext()) {
-					paragraph = paraIter.next();
-					List<XWPFRun> runsList = paragraph.getRuns();
-					// iterate through runs
-					for (XWPFRun run : runsList) {
-
-						/** Here we add methods with logic of check*/
-						checkFont(run);
-						checkFontSize(run);
-					}
+					/** Here we add methods with logic of check*/
+					checkFont(run);
+					checkFontSize(run);
 				}
-				fis.close();
 			}
+			fis.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -110,8 +112,8 @@ public class MistakeFinder {
 	 */
 	private void checkFont(XWPFRun sentences) {
 		String font = sentences.getFontFamily();
-		if (!font.equals(rule.getFont())) {
-			MistakeType type = factory.getMistakeType(MistakeTypeEnum.FONT_MISTAKE);
+		if (font != null && !font.equals(rule.getFont())) {
+			MistakeType type = typeFactory.getMistakeType(MistakeTypeEnum.FONT_MISTAKE);
 			Mistake mistake = new Mistake(sentences.toString(), document, type);
 			mistakeService.add(mistake);
 			mistakes.add(mistake);
@@ -125,9 +127,9 @@ public class MistakeFinder {
 	 */
 	private void checkFontSize(XWPFRun sentences) {
 		if (sentences != null) {
-			int size = sentences.getFontSize();
-			if (size != rule.getFontSize()) {
-				MistakeType type = factory.getMistakeType(MistakeTypeEnum.FONT_SIZE_MISTAKE);
+			Integer size = sentences.getFontSize();
+			if (size != -1 && !size.equals(rule.getFontSize())) {
+				MistakeType type = typeFactory.getMistakeType(MistakeTypeEnum.FONT_SIZE_MISTAKE);
 				Mistake mistake = new Mistake(sentences.toString(), document, type);
 				mistakeService.add(mistake);
 				mistakes.add(mistake);
@@ -146,7 +148,7 @@ public class MistakeFinder {
 			BigInteger intendLeft = sectPr.getLeft();
 			if (intendLeft != null) {
 				if (!Objects.equals(intendLeft, BigInteger.valueOf(rule.getIntendSize()))) {
-					MistakeType type = factory.getMistakeType(MistakeTypeEnum.INTEND_SIZE_MISTAKE);
+					MistakeType type = typeFactory.getMistakeType(MistakeTypeEnum.INTEND_SIZE_MISTAKE);
 					Mistake mistake = new Mistake(null, document, type);
 					mistakeService.add(mistake);
 					mistakes.add(mistake);

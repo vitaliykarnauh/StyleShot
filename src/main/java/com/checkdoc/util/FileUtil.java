@@ -2,16 +2,17 @@ package com.checkdoc.util;
 
 import com.checkdoc.check.MistakeFinder;
 import com.checkdoc.check.Rule;
-import com.checkdoc.domain.*;
+import com.checkdoc.domain.Directory;
+import com.checkdoc.domain.Document;
+import com.checkdoc.domain.Mistake;
+import com.checkdoc.domain.User;
 import com.checkdoc.service.DirectoryService;
 import com.checkdoc.service.MistakeService;
 import com.checkdoc.service.MistakeTypeService;
 import com.checkdoc.service.UserService;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,8 +21,6 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public final class FileUtil {
@@ -52,24 +51,8 @@ public final class FileUtil {
     }
 
     public static List<Mistake> findMistakes(Document document, Rule rule, MistakeService mistakeService, MistakeTypeService mistakeTypeService) {
-        MistakeFinder mf = new MistakeFinder(document, rule, mistakeService);
-        //return mf.check();
-        return generateMistakes(document, mistakeTypeService);
-    }
-
-    private static List<Mistake> generateMistakes(Document document, MistakeTypeService mistakeTypeService) {
-        List<Mistake> mistakes = new ArrayList<>();
-        Mistake mock = new Mistake("asdfasdfasdfasdfasdf0", document, mistakeTypeService.findMistakeTypeById(1L));
-        mock.setId(888L);
-        mistakes.add(mock);
-        mock = new Mistake("qwerqwerqwer", document, mistakeTypeService.findMistakeTypeById(2L));
-        mock.setId(888L);
-        mistakes.add(mock);
-        mock = new Mistake("zxcvzxvczxvczxv", document, mistakeTypeService.findMistakeTypeById(3L));
-        mock.setId(888L);
-        mistakes.add(mock);
-
-        return mistakes;
+        MistakeFinder mf = new MistakeFinder(document, rule, mistakeService, mistakeTypeService);
+        return mf.check();
     }
 
     private static File createFile(MultipartFile mFile, String filePath) {
