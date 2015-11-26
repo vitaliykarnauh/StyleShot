@@ -20,6 +20,7 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -50,9 +51,25 @@ public final class FileUtil {
         return new Document(filePath, getCreationTime(file), directory);
     }
 
-    public static List<Mistake> findMistakes(Document document, Rule rule, MistakeService mistakeService) {
+    public static List<Mistake> findMistakes(Document document, Rule rule, MistakeService mistakeService, MistakeTypeService mistakeTypeService) {
         MistakeFinder mf = new MistakeFinder(document, rule, mistakeService);
-        return mf.check();
+        //return mf.check();
+        return generateMistakes(document, mistakeTypeService);
+    }
+
+    private static List<Mistake> generateMistakes(Document document, MistakeTypeService mistakeTypeService) {
+        List<Mistake> mistakes = new ArrayList<>();
+        Mistake mock = new Mistake("asdfasdfasdfasdfasdf0", document, mistakeTypeService.findMistakeTypeById(1L));
+        mock.setId(888L);
+        mistakes.add(mock);
+        mock = new Mistake("qwerqwerqwer", document, mistakeTypeService.findMistakeTypeById(2L));
+        mock.setId(888L);
+        mistakes.add(mock);
+        mock = new Mistake("zxcvzxvczxvczxv", document, mistakeTypeService.findMistakeTypeById(3L));
+        mock.setId(888L);
+        mistakes.add(mock);
+
+        return mistakes;
     }
 
     private static File createFile(MultipartFile mFile, String filePath) {
