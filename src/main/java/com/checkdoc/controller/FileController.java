@@ -32,7 +32,12 @@ public class FileController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    private static HttpSession session() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest().getSession(true); // true == allow create
+    }
+
+    @RequestMapping(value = "/file-upload", method = RequestMethod.POST)
     public String uploadFile(@RequestParam(value = "file", required = false) MultipartFile file, Model model) {
         if (file != null && !file.isEmpty()) {
             try {
@@ -96,10 +101,5 @@ public class FileController {
         model.addAttribute("mistakes", mistakes);
 
         return "result";
-    }
-
-    private static HttpSession session() {
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        return attr.getRequest().getSession(true); // true == allow create
     }
 }
