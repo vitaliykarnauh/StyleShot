@@ -9,7 +9,7 @@
     <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic'-->
     <!--rel='stylesheet' type='text/css'/>-->
     <script src="js/jquery-2.1.4.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js.js"></script>
     <script src="js/script.js"></script>
     <script src="js/dropzone.js"></script>
 </head>
@@ -103,25 +103,29 @@
         <h4>Параметры проверки: </h4>
         <br/>
         <h5>Шрифт </h5>
-        <select ng-model='discussionsSelect' class='form-control'>
+
+        <form action="/process" method="post">
+            <select name="font" ng-model='discussionsSelect' class='form-control'>
             <option value='tnr'>Times New Roman</option>
             <option value='arial'>Arial</option>
         </select>
 
         <br/>
         <h5>Кегель (размер шрифта)</h5>
-        <input type="number" class="form-control" value="14"/>
+            <input name="fontSize" type="number" class="form-control" value="14"/>
 
         <br/>
         <h5>Размер отступа </h5>
-        <input type="number" class="form-control" value="0"/>
+            <input name="indentSize" type="number" class="form-control" value="0"/>
 
         <br/>
         <h5>Межстрочный интервал </h5>
-        <input type="number" class="form-control" value="1.5"/>
+            <input type="number" name="lineSpacing" class="form-control" value="1.5"/>
 
         <br/>
-        <button type="button" class="check-btn btn btn-primary text-center">Проверить</button>
+
+            <button type="submit" class="check-btn btn btn-primary text-center">Проверить</button>
+        </form>
 
     </div>
 </div>

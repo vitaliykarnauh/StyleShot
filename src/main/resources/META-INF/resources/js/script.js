@@ -61,5 +61,5 @@ function everythingIsFine($file_name) {
 $(window).load(function() {
 	$dz_div = $('div.dz-default.dz-message');
 	$dz_div.find('span').html('Перетащите файл для загрузки');
-	$dz_div.append('<img src="../META-INF/resources/images/inbox-upload.png" alt="uploading pic" class="uploading-pic" />');
+	$dz_div.append('<img src="images/inbox-upload.png" alt="uploading pic" class="uploading-pic" />');
 });
