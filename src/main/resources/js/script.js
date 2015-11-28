@@ -6,7 +6,7 @@ $(document).ready(function (){
     //     placement: 'top'
     // });
 
-    //$("#header").load("header.html");
+    $("#header").load("header.html");
     $('.error-div').hide();
 
     $('#file-upload').change(function() {
@@ -61,5 +61,10 @@ function everythingIsFine($file_name) {
 $(window).load(function() {
 	$dz_div = $('div.dz-default.dz-message');
 	$dz_div.find('span').html('Перетащите файл для загрузки');
+<<<<<<< HEAD
+	//$dz_div.append('<img src="images/inbox-upload.png" alt="uploading pic" class="uploading-pic" />');
+	$dz_div.append('<img src="../META-INF/resources/images/inbox-upload.png" alt="uploading pic" class="uploading-pic" />');
+=======
 	$dz_div.append('<img src="images/inbox-upload.png" alt="uploading pic" class="uploading-pic" />');
+>>>>>>> b64ef79dd778a4db7d36bac2e3e690a99a0c274e
 });
