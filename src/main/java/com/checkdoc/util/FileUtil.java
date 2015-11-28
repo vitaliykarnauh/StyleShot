@@ -44,7 +44,8 @@ public final class FileUtil {
         }
 
         String fileName = mFile.getOriginalFilename();
-        String filePath = directory.getUrl() + "\\" + fileName.substring(fileName.lastIndexOf('\\') + 1, fileName.length());
+        String separator = System.getProperty("file.separator");
+        String filePath = directory.getUrl() + separator + fileName.substring(fileName.lastIndexOf(separator) + 1, fileName.length());
         File file = createFile(mFile, filePath);
 
         return new Document(filePath, getCreationTime(file), directory);
@@ -80,7 +81,7 @@ public final class FileUtil {
     }
 
     private static Directory getDirectory(User user) {
-        File file = new File(PATH_DOCUMENTS + user.getId() + "/");
+        File file = new File(PATH_DOCUMENTS + user.getId() + System.getProperty("file.separator"));
         if (!file.exists()) {
             if (!file.mkdirs()) {
                 System.out.println("Cannot create folder ==> " + file.getAbsolutePath());
