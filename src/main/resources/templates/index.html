@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CheckDoc</title>
+    <meta charset='utf-8'/>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css"/>
+    <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic'-->
+    <!--rel='stylesheet' type='text/css'/>-->
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap.min.js.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/dropzone.js"></script>
+</head>
+<body>
+<header class='navbar navbar-default navbar-fixed-top'>
+    <div class="container header-container">
+        <a href="index.html" class='navbar-brand'><span class='mt'>CheckDoc</span></a>
+        <ul class="nav navbar-nav navbar-right">
+            <li class='dropdown pull-right'>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class='login-span'>Вход</span> <span
+                        class="caret"></span></a>
+
+                <form action="" method="get" class="dropdown-menu collapse dropdown-collapse signin-form"
+                      aria-labelledby="dropdownMenu1">
+                    <div class="login-box well">
+                        <legend>Авторизация</legend>
+                        <div class="form-group">
+                            <label for="username-email">E-mail</label>
+                            <input value='' id="username-email" placeholder="Введите e-mail" type="email"
+                                   class="form-control" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Пароль</label>
+                            <input id="password" value='' placeholder="Введите пароль" type="password"
+                                   class="form-control" required="true"/>
+                        </div>
+                        <div class="input-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="login-remember" type="checkbox" name="remember" value="1"/> Запомнить
+                                    меня
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-login-submit btn-block m-t-md"
+                                   value="Войти"/>
+                        </div>
+                        <span class='text-center'><a href="/resetting/request" class="text-sm">Забыли пароль?</a></span>
+                        <li class="divider"></li>
+                        <div class="form-group">
+                            <br/>
+                            <a href="register.html" class="btn btn-default btn-block m-t-md">Создать аккаунт</a>
+                        </div>
+
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+</header>
+<div id="header"></div>
+<div class="greeting container">
+    <h1>Соответствие ГОСТам</h1>
+
+    <h3>Проверка документа на ошибки, ГОСТы или указанные параметры</h3>
+    <br/><br/>
+</div>
+<div class="upload-area container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="error-div">
+                Допустимое разрешение документа .docx
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <!-- <div class="panel panel-default">
+            <div class="panel-heading"><strong>Загрузка файла</strong> <small> </small></div>
+            <div class="panel-body">
+            <div class="input-group image-preview">
+                <input placeholder="" type="text" class="form-control image-preview-filename file-upload-name" disabled="disabled">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span class="glyphicon glyphicon-remove"></span> Очистить </button>
+                    <div class="btn btn-default image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> 	<span class="image-preview-input-title">Выбрать файл</span>
+                        <input type="file" id="file-upload" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
+                    </div>
+                    <button type="button" id="upload-btn" class="btn btn-labeled btn-default" disabled> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Загрузить</button>
+                </span>
+            </div> -->
+
+            <!-- Drop Zone -->
+            <form action="file-upload"
+                  class="dropzone "
+                  id="filesdropzone">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3 col-md-offset-1 col-xs-12 well container">
+        <h4>Параметры проверки: </h4>
+        <br/>
+        <h5>Шрифт </h5>
+
+        <form action="/process" method="post">
+            <select name="font" ng-model='discussionsSelect' class='form-control'>
+            <option value='tnr'>Times New Roman</option>
+            <option value='arial'>Arial</option>
+        </select>
+
+        <br/>
+        <h5>Кегель (размер шрифта)</h5>
+            <input name="fontSize" type="number" class="form-control" value="14"/>
+
+        <br/>
+        <h5>Размер отступа </h5>
+            <input name="indentSize" type="number" class="form-control" value="0"/>
+
+        <br/>
+        <h5>Межстрочный интервал </h5>
+            <input type="number" name="lineSpacing" class="form-control" value="1.5"/>
+
+        <br/>
+
+            <button type="submit" class="check-btn btn btn-primary text-center">Проверить</button>
+        </form>
+
+    </div>
+</div>
+<div class="exp container">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-paperclip"></span>
+            <h5>Как использовать</h5>
+
+            <p>Описание. Nullam scelerisque, lorem in vulputate euismod, ipsum lectus posuere orci, nec egestas lacus
+                sapien quis dolor. Etiam diam magna, luctus eget convallis ac, pretium vel leo. </p>
+        </div>
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-lock"></span>
+            <h5>Безопасность</h5>
+
+            <p>Vestibulum at tellus sem. Sed imperdiet, mauris in porta consequat, odio metus viverra dui, a placerat
+                neque nulla eget diam. Nam nec sodales enim, ac bibendum diam.</p>
+        </div>
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-stats"></span>
+            <h5>Статистика</h5>
+
+            <p>Mauris sagittis libero arcu, nec luctus ex imperdiet ut. Phasellus et malesuada massa. Phasellus
+                consequat non ligula sit amet consectetur. Mauris in mi luctus, ultrices nisl ut, lobortis sapien.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
