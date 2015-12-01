@@ -1,7 +1,9 @@
 package com.checkdoc.service.impl;
 
 import com.checkdoc.dao.UserDao;
+import com.checkdoc.domain.Role;
 import com.checkdoc.domain.User;
+import com.checkdoc.exception.IncorrectPasswordException;
 import com.checkdoc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,4 +48,28 @@ public class UserServiceImpl implements UserService {
     public User findUserByUserName(String userName) {
         return userDao.findByUserName(userName);
     }
+
+    @Override
+    public User register(String userName, String email, String password, String passwordConfirmation) {
+        if (!password.equals(passwordConfirmation)) {
+            throw new IncorrectPasswordException("incorrectPassword");
+        }
+        User u = new User();
+        u.setUserName(userName);
+        u.setEmail(email);
+        u.setPassword(password);
+        u.setRole(new Role("user"));
+        add(u);
+        return u;
+    }
+
+    @Override
+    public User login(String email, String password) {
+        User user = userDao.findByEmail(email);
+        if (user == null || !user.getPassword().equals(password)) {
+            return null;
+        }
+        return user;
+    }
 }
+

@@ -18,4 +18,8 @@ public interface UserService {
 
     User findUserByUserName(String userName);
 
+    User register(String userName, String email, String password, String passwordConfirmation);
+
+    User login(String email,String password);
+
 }

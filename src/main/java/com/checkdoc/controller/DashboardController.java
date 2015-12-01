@@ -1,9 +1,8 @@
 package com.checkdoc.controller;
 
 
+import com.checkdoc.domain.User;
 import com.checkdoc.exception.IncorrectPasswordException;
-import com.checkdoc.process.UserProcess;
-import com.checkdoc.process.impl.UserProcessImpl;
 import com.checkdoc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,7 @@ public class DashboardController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value ={"/", "/dashboard"})
+    @RequestMapping(value = {"/", "/dashboard"})
     public String redirectToDashboard(Model model) {
         String hello = "hello";
         model.addAttribute("hello", hello);
@@ -25,20 +24,31 @@ public class DashboardController {
     }
 
     @RequestMapping(value = {"/signup"})
-        public String showRegistrationPage(Model model) {
-            return "register";
+    public String showRegistrationPage(Model model) {
+        return "register";
     }
 
     @RequestMapping(value = {"/register"})
-        public String registerNewUser(@RequestParam("display_name") String username, @RequestParam("email") String email,@RequestParam("password") String password,@RequestParam("password_confirmation") String passwordConfirmation, Model model) {
-        UserProcess userProcess=new UserProcessImpl(userService);
+    public String registerNewUser(@RequestParam("display_name") String username,
+                                  @RequestParam("email") String email,
+                                  @RequestParam("password") String password,
+                                  @RequestParam("password_confirmation") String passwordConfirmation,
+                                  Model model) {
         try {
-            userProcess.register(username, email, password,passwordConfirmation);
-        }
-        catch (IncorrectPasswordException e)
-        {
+            userService.register(username, email, password, passwordConfirmation);
+        } catch (IncorrectPasswordException e) {
             return "register";
         }
-        return "myAccount";
+        return "dashboard";
+    }
+
+    @RequestMapping(value = {"/login"})
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
+        User user = userService.login(email, password);
+        if (user == null) {
+            return "dashboard";
+        }
+        model.addAttribute("user",user);
+        return "mypage";
     }
 }
