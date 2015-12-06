@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CheckDoc</title>
+        <meta charset='utf-8'/>
+        <!-- ../META-INF/resources/ -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="../META-INF/resources/css/dropzone.css" type="text/css"/>
+        <link rel="stylesheet" href="../META-INF/resources/css/main.css" type="text/css"/>
+        <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic'-->
+        <!--rel='stylesheet' type='text/css'/>-->
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+        <script src="../META-INF/resources/js/dropzone.js"></script>
+        <script src="../META-INF/resources/js/script.js"></script>
+    </head>
+    <body>
+        <div id="header"></div>
+        <div class="greeting container">
+            <h1>Соответствие ГОСТам</h1>
+            <h3>Проверка документа на ошибки, ГОСТы или указанные параметры</h3>
+            <br/><br/>
+        </div>
+        <div class="upload-area container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="error-div">
+                        Допустимое разрешение документа .docx
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <!-- Drop Zone -->
+                    <form action="file-upload"
+                        class="dropzone "
+                        id="filesdropzone">
+                    </form>
+                </div>
+                    <div class="col-md-3 col-md-offset-1 col-xs-12 well container">
+                    <h4>Параметры проверки: </h4>
+                    <br/>
+                    <h5>Шрифт </h5>
+                    <form action="/process" method="post">
+                        <select name="font" ng-model='discussionsSelect' class='form-control'>
+                            <option value='tnr'>Times New Roman</option>
+                            <option value='arial'>Arial</option>
+                        </select>
+                        <br/>
+                        <h5>Кегель (размер шрифта)</h5>
+                        <input name="fontSize" type="number" class="form-control" value="14"/>
+                        <br/>
+                        <h5>Размер отступа </h5>
+                        <input name="indentSize" type="number" class="form-control" value="0"/>
+                        <br/>
+                        <h5>Межстрочный интервал </h5>
+                        <input type="number" name="lineSpacing" class="form-control" value="1.5"/>
+                        <br/>
+                        <button type="submit" class="check-btn btn btn-primary text-center">Проверить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="exp container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="glyphicon glyphicon-paperclip"></span>
+                    <h5>Как использовать</h5>
+                    <p>Описание. Nullam scelerisque, lorem in vulputate euismod, ipsum lectus posuere orci, nec egestas lacus
+                    sapien quis dolor. Etiam diam magna, luctus eget convallis ac, pretium vel leo. </p>
+                </div>
+                <div class="col-md-4">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <h5>Безопасность</h5>
+                    <p>Vestibulum at tellus sem. Sed imperdiet, mauris in porta consequat, odio metus viverra dui, a placerat
+                    neque nulla eget diam. Nam nec sodales enim, ac bibendum diam.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="glyphicon glyphicon-stats"></span>
+                    <h5>Статистика</h5>
+                    <p>Mauris sagittis libero arcu, nec luctus ex imperdiet ut. Phasellus et malesuada massa. Phasellus
+                    consequat non ligula sit amet consectetur. Mauris in mi luctus, ultrices nisl ut, lobortis sapien.</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
