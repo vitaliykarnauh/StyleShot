@@ -44,16 +44,14 @@
                         <br/>
                     <h5>Шрифт </h5>
                     <form action="/process" method="post">
-                        <select name="font" class='form-control'>
+                        <select name="font" class='form-control font-t'>
                             <option value='tnr'>Times New Roman</option>
                             <option value='arial'>Arial</option>
                         </select>
+                        <br/>
                         <h5 title="Размер шрифта">Кегель</h5>
                         <input name="fontSize" type="number" class="form-control font-s" value="14"/>
-                        <h5 title="Межстрочный интервал">Интерлиньяж</h5>
-                        <input type="number" name="lineSpacing" class="form-control line-h" value="1.5"/>
-                        <h5 title="Размер отступа от края">Поля</h5>
-                        <input name="indentSize" type="number" class="form-control" value="0"/>
+                        <br/>
                         <button type="submit" class="check-btn btn btn-primary text-center error-check-btn">Проверить на ошибки</button>
                     </form>
                         <hr/>

@@ -3,8 +3,8 @@ $(document).ready(function (){
     //     placement: 'top'
     // });
 
-	$(".pl-check-btn").prop('disabled', true);;
-    $(".error-check-btn").prop('disabled', true);;
+	$(".pl-check-btn").prop('disabled', true);
+    $(".error-check-btn").prop('disabled', true);
     $("#header").load("html/header.html");
     $('.error-div').hide();
 
@@ -28,13 +28,13 @@ $(document).ready(function (){
             console.log(count);
             if (count == 1) {
                 $(".pl-check-btn").prop('disabled', true);
-                $("input").prop('disabled', false);
-                $("select").prop('disabled', false);
+                $(".font-t").prop('disabled', false);
+				$(".font-s").prop('disabled', false);
                 $(".error-check-btn").prop('disabled', false);
             } else if (count > 1) {
                 $(".pl-check-btn").prop('disabled', false);
-                $("input").prop('disabled', true);
-                $("select").prop('disabled', true);
+				$(".font-t").prop('disabled', true);
+				$(".font-s").prop('disabled', true);
                 $(".error-check-btn").prop('disabled', true);
             }
 			if (file.name.split('\.').slice(-1)[0] != 'docx') {
