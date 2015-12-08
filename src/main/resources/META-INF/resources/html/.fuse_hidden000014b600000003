@@ -27,7 +27,7 @@
 							<span class='text-center'><a href="/resetting/request" class="text-sm">Забыли пароль?</a></span>
 							<div class="form-group">
 								<br/>
-								<a href="${contextPath}/html/register.html" class="btn btn-default btn-block m-t-md">Создать аккаунт</a>
+								<a href="register.html" class="btn btn-default btn-block m-t-md">Создать аккаунт</a>
 							</div>
 						</div>
 					</form>

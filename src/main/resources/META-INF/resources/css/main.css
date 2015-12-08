@@ -196,3 +196,23 @@ hr {
     background-color: #D73C2C;
     border: 2px solid #D73C2C;
 }
+
+#piracy-res td, th {
+    font-size: 1.2em;
+    text-align: left;
+    padding: 20px 30px;
+    margin: 20px;
+}
+
+/*#piracy-res tr:nth-child(2n+1) {*/
+    /*background-color: rgba(204, 204, 204, 0.2);*/
+/*}*/
+
+#piracy-res tr:nth-child(2n) {
+    background-color: #ddd;
+}
+
+#piracy-res tr:first-child {
+    background-color: #fff;
+    color: #333;
+}
