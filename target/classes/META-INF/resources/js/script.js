@@ -3,6 +3,8 @@ $(document).ready(function (){
     //     placement: 'top'
     // });
 
+	$(".pl-check-btn").prop('disabled', true);;
+    $(".error-check-btn").prop('disabled', true);;
     $("#header").load("html/header.html");
     $('.error-div').hide();
 
@@ -22,6 +24,19 @@ $(document).ready(function (){
     Dropzone.options.filesdropzone = {
 		paramName: "file", // The name that will be used to transfer the file
 		accept: function(file, done) {
+            var count = this.files.length;
+            console.log(count);
+            if (count == 1) {
+                $(".pl-check-btn").prop('disabled', true);
+                $("input").prop('disabled', false);
+                $("select").prop('disabled', false);
+                $(".error-check-btn").prop('disabled', false);
+            } else if (count > 1) {
+                $(".pl-check-btn").prop('disabled', false);
+                $("input").prop('disabled', true);
+                $("select").prop('disabled', true);
+                $(".error-check-btn").prop('disabled', true);
+            }
 			if (file.name.split('\.').slice(-1)[0] != 'docx') {
 				// alert(file.type);
 				this.removeFile(file);
@@ -39,7 +54,7 @@ $(document).ready(function (){
 			// 	everythingIsFine();
 			// }
 		},
-		maxFiles: 1
+		maxFiles: 10
 	};
 });
 

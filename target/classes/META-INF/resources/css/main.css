@@ -147,7 +147,11 @@ table tr td:last-child {
   border-color: #222;
 }
 
-
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+}
 
 .image-preview-input {
     position: relative;
@@ -170,4 +174,25 @@ table tr td:last-child {
 }
 .image-preview-input-title {
     margin-left:2px;
+}
+
+.error-check-btn {
+    background-color: #0287D0;
+    border: 2px solid #0287D0;
+}
+
+.error-check-btn:hover {
+    background-color: #0077C0;
+    border: 2px solid #0077C0;
+}
+
+.pl-check-btn {
+    margin-top: 10px;
+    background-color: #E74C3C;
+    border: 2px solid #E74C3C;
+}
+
+.pl-check-btn:hover {
+    background-color: #D73C2C;
+    border: 2px solid #D73C2C;
 }
