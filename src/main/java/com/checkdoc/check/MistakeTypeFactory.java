@@ -32,6 +32,9 @@ public class MistakeTypeFactory {
 		} else if (typeEnum.equals(MistakeTypeEnum.INTEND_SIZE_MISTAKE)) {
 			String name = MistakeTypeEnum.INTEND_SIZE_MISTAKE.name();
 			return mistakeTypeService.findMistakeTypeByName(name);
+		}else if (typeEnum.equals(MistakeTypeEnum.PLAGIARISM)) {
+			String name = MistakeTypeEnum.PLAGIARISM.name();
+			return mistakeTypeService.findMistakeTypeByName(name);
 		}
 		return null;
 	}

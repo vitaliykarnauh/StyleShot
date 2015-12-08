@@ -7,5 +7,5 @@ package com.checkdoc.check;
  * @version 1.0 4.11.2015
  */
 public enum MistakeTypeEnum {
-	FONT_MISTAKE, FONT_SIZE_MISTAKE, INTEND_SIZE_MISTAKE
+	FONT_MISTAKE, FONT_SIZE_MISTAKE, INTEND_SIZE_MISTAKE, PLAGIARISM
 }
