@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>CheckDoc</title>
-		<meta charset='utf-8'>
-		<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
-		<link rel="stylesheet" href="/css/register.css" type="text/css"/>
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'/>
+		<meta charset='utf-8' />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/register.css" type="text/css" />
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 		<script src="/js/jquery-2.1.4.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 	</head>
@@ -14,9 +14,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-					<form>
+					<form action="" method="post">
 						<h2>Регистрация</h2>
-						<hr class="colorgraph">
+						<hr class="colorgraph" />
 						<div class="form-group">
 							<input type="text" name="display_name" id="display_name" class="form-control input-lg" placeholder="Имя пользователя" tabindex="3" required="required" />
 						</div>
@@ -36,10 +36,10 @@
 							</div>
 						</div>
 						
-						<hr class="colorgraph">
+						<hr class="colorgraph" />
 						<div class="row">
 							<div class="col-xs-12 col-md-12">
-								<input type="submit" value="Зарегистрироваться" class="btn btn-primary btn-block btn-lg" tabindex="7">
+								<input type="submit" value="Зарегистрироваться" class="btn btn-primary btn-block btn-lg" tabindex="7" />
 							</div>
 						</div>
 					</form>

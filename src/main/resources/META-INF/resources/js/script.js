@@ -21,29 +21,31 @@ $(document).ready(function (){
 		}
     });
 
+	var count;
     Dropzone.options.filesdropzone = {
 		paramName: "file", // The name that will be used to transfer the file
 		accept: function(file, done) {
-            var count = this.files.length;
+            count = this.files.length;
             console.log(count);
-            if (count == 1) {
-                $(".pl-check-btn").prop('disabled', true);
-                $(".font-t").prop('disabled', false);
-				$(".font-s").prop('disabled', false);
-                $(".error-check-btn").prop('disabled', false);
-            } else if (count > 1) {
-                $(".pl-check-btn").prop('disabled', false);
-				$(".font-t").prop('disabled', true);
-				$(".font-s").prop('disabled', true);
-                $(".error-check-btn").prop('disabled', true);
-            }
 			if (file.name.split('\.').slice(-1)[0] != 'docx') {
 				// alert(file.type);
 				this.removeFile(file);
+				count--;
 				showExtError();
 			} else {
 				done();
 				everythingIsFine();
+			}
+			if (count == 1) {
+				$(".pl-check-btn").prop('disabled', true);
+				$(".font-t").prop('disabled', false);
+				$(".font-s").prop('disabled', false);
+				$(".error-check-btn").prop('disabled', false);
+			} else if (count > 1) {
+				$(".pl-check-btn").prop('disabled', false);
+				$(".font-t").prop('disabled', true);
+				$(".font-s").prop('disabled', true);
+				$(".error-check-btn").prop('disabled', true);
 			}
 			// alert(file);
 			// extension = file.name.split('\.').slice(-1)[0];
