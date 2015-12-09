@@ -4,8 +4,9 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class='dropdown pull-right'>
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1"><span class='login-span'>Вход</span> <span class="caret"></span></a>
-					<form action="" method="get" role="menu" class="dropdown-menu collapse dropdown-collapse signin-form" aria-labelledby="dropdownMenu1">
-						<div class="login-box well">
+					<div role="menu" class="dropdown-menu collapse dropdown-collapse well"  aria-labelledby="dropdownMenu1">
+						<form action="" method="get" class="signin-form">
+						<div class="login-box">
 							<legend>Авторизация</legend>
 							<div class="form-group">
 								<label for="username-email">E-mail</label>
@@ -22,15 +23,18 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="submit" class="btn btn-primary btn-login-submit btn-block m-t-md" value="Войти" />
+								<input type="submit" class="btn btn-primary btn-login-submit btn-block" value="Войти" />
 							</div>
 							<span class='text-center'><a href="/resetting/request" class="text-sm">Забыли пароль?</a></span>
 							<div class="form-group">
 								<br/>
-								<a href="${contextPath}/html/register.html" class="btn btn-default btn-block m-t-md">Создать аккаунт</a>
 							</div>
 						</div>
 					</form>
+						<form method="get" action="/register">
+							<input type="submit" value="Создать аккаунт" class="btn btn-default btn-block" />
+						</form>
+					</div>
 				</li>
 			</ul>
 		</div>
