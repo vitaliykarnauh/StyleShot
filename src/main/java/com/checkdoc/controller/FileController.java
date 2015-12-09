@@ -70,8 +70,8 @@ public class FileController {
     @RequestMapping(value = "/process", method = RequestMethod.POST)
     public String processFile(@RequestParam("font") String font,
                               @RequestParam("fontSize") String fontSizeStr,
-                              @RequestParam("indentSize") String indentSizeStr,
-                              @RequestParam("lineSpacing") String lineSpacingStr,
+                              @RequestParam(value = "indentSize", required = false) String indentSizeStr,
+                              @RequestParam(value = "lineSpacing", required = false) String lineSpacingStr,
                               Model model) {
         Document document = (Document) session().getAttribute("lastDocument");
         if (document == null) {
@@ -101,5 +101,10 @@ public class FileController {
         model.addAttribute("mistakes", mistakes);
 
         return "result";
+    }
+
+    @RequestMapping(value = "/pragiarism", method=RequestMethod.POST)
+    public String checkPragiarism(){
+        return "piracyresult";
     }
 }
