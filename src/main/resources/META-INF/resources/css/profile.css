@@ -1,0 +1,24 @@
+@import url(main.css);
+
+input {
+	margin: 10px auto 20px auto;
+}
+
+input[type="password"]:last-child {
+	margin-top: 0;
+}
+
+input[type="submit"] {
+	width: 100%;
+}
+
+.avatar {
+	height: 150px;
+	width: 150px;
+	display: block;
+	margin: auto;
+}
+
+#errors-st tr:first-child td, #piracy-st tr:first-child td {
+	text-align: center;
+}

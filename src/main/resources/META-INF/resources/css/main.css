@@ -61,7 +61,7 @@ h3 {
   padding: 10px;
   border: 1px solid #ccc;
   margin-bottom: 40px;
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', serif;
 }
 
 .error-div {
@@ -142,6 +142,7 @@ table tr td:last-child {
   line-height: 200px;
   text-align: center
 }
+
 .upload-drop-zone.drop {
   color: #222;
   border-color: #222;
@@ -151,29 +152,6 @@ hr {
     border: 0;
     height: 1px;
     background-color: #ccc;
-}
-
-.image-preview-input {
-    position: relative;
-    overflow: hidden;
-    margin: 0px;    
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;    
-}
-.image-preview-input input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-.image-preview-input-title {
-    margin-left:2px;
 }
 
 .error-check-btn {
@@ -197,7 +175,7 @@ hr {
     border: 2px solid #D73C2C;
 }
 
-#piracy-res td, th {
+#piracy-res td, th, #errors-st td, #piracy-st td {
     font-size: 1.2em;
     text-align: left;
     padding: 20px 30px;
@@ -208,11 +186,11 @@ hr {
     /*background-color: rgba(204, 204, 204, 0.2);*/
 /*}*/
 
-#piracy-res tr:nth-child(2n) {
+#piracy-res tr:nth-child(2n), #errors-st tr:nth-child(2n), #piracy-st tr:nth-child(2n){
     background-color: #ddd;
 }
 
-#piracy-res tr:first-child {
+#piracy-res tr:first-child, #errors-st tr:first-child, #piracy-st tr:first-child {
     background-color: #fff;
     color: #333;
 }

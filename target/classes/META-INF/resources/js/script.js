@@ -60,7 +60,6 @@ $(document).ready(function (){
 	};
 });
 
-
 function showExtError() {
 	// $('#upload-btn').prop('disabled', true);
 	// $('.file-upload-name').val('');
