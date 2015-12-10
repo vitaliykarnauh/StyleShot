@@ -1,87 +1,95 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>CheckDoc</title>
-        <meta charset='utf-8'/>
-        <!-- ../META-INF/resources/ -->
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">-->
-        <link rel="stylesheet" href="/css/dropzone.css" type="text/css"/>
-        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
-        <link rel="stylesheet" href="/css/main.css" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic'
-        rel='stylesheet' type='text/css'/>
-        <script src="/js/jquery-2.1.4.js"></script>
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>-->
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/dropzone.js"></script>
-        <script src="/js/script.js"></script>
-    </head>
-    <body>
-    <div id="header"></div>
-        <div class="greeting container">
-            <h1>Соответствие ГОСТам</h1>
-            <h3>Проверка документа на ошибки, ГОСТы или указанные параметры</h3>
-            <br/><br/>
-        </div>
-        <div class="upload-area container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="error-div">
-                        Допустимое расширение документа .docx
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-xs-12">
-                    <!-- Drop Zone -->
-                    <form action="file-upload"
-                        class="dropzone "
-                        id="filesdropzone">
-                    </form>
-                </div>
-                    <div class="col-md-3 col-md-offset-1 col-xs-12 well container">
-                    <h4>Параметры проверки на ошибки: </h4>
-                        <br/>
-                    <h5>Шрифт </h5>
-                    <form action="/process" method="post">
-                        <select name="font" class='form-control font-t'>
-                            <option value='tnr'>Times New Roman</option>
-                            <option value='arial'>Arial</option>
-                        </select>
-                        <br/>
-                        <h5 title="Размер шрифта">Кегель</h5>
-                        <input name="fontSize" type="number" class="form-control font-s" value="14"/>
-                        <br/>
-                        <button type="submit" class="check-btn btn btn-primary text-center error-check-btn">Проверить на ошибки</button>
-                    </form>
-                        <hr/>
-                    <form action="/pragiarism" method="post">
-                        <button type="submit" class="check-btn btn btn-warning text-center pl-check-btn">Проверить на плагиат</button>
-                    </form>
-                </div>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CheckDoc</title>
+    <meta charset='utf-8'/>
+    <!-- ../META-INF/resources/ -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/dropzone.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'/>
+    <script src="/js/jquery-2.1.4.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>-->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/dropzone.js"></script>
+    <script src="/js/script.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<div class="greeting container">
+    <h1 th:text="#{label.gost_match}"/>
+
+    <h3 th:text="#{label.description}"/>
+    <br/><br/>
+</div>
+<div class="upload-area container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="error-div">
+                <span th:text="#{error.extension}"/>
             </div>
         </div>
-        <div class="exp container">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="glyphicon glyphicon-paperclip"></span>
-                    <h5>Как использовать</h5>
-                    <p>Описание. Nullam scelerisque, lorem in vulputate euismod, ipsum lectus posuere orci, nec egestas lacus
-                    sapien quis dolor. Etiam diam magna, luctus eget convallis ac, pretium vel leo. </p>
-                </div>
-                <div class="col-md-4">
-                    <span class="glyphicon glyphicon-lock"></span>
-                    <h5>Безопасность</h5>
-                    <p>Vestibulum at tellus sem. Sed imperdiet, mauris in porta consequat, odio metus viverra dui, a placerat
-                    neque nulla eget diam. Nam nec sodales enim, ac bibendum diam.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="glyphicon glyphicon-stats"></span>
-                    <h5>Статистика</h5>
-                    <p>Mauris sagittis libero arcu, nec luctus ex imperdiet ut. Phasellus et malesuada massa. Phasellus
-                    consequat non ligula sit amet consectetur. Mauris in mi luctus, ultrices nisl ut, lobortis sapien.</p>
-                </div>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <!-- Drop Zone -->
+            <form action="file-upload"
+                  class="dropzone "
+                  id="filesdropzone"
+                  th:multiple="true">
+            </form>
         </div>
-    </body>
+        <div class="col-md-3 col-md-offset-1 col-xs-12 well container">
+            <h4 th:text="#{label.parameters}"/>
+            <br/>
+            <h5 th:text="#{label.font}"/>
+
+            <form action="/process" method="post">
+                <select name="font" class='form-control font-t'>
+                    <option value='tnr'>Times New Roman</option>
+                    <option value='arial'>Arial</option>
+                </select>
+                <br/>
+                <h5 title="Размер шрифта" th:text="#{label.font_size}"/>
+                <input name="fontSize" type="number" class="form-control font-s" value="14"/>
+                <br/>
+                <button type="submit" class="check-btn btn btn-primary text-center error-check-btn"
+                        th:text="#{action.check_mistakes}"/>
+            </form>
+            <hr/>
+            <form action="/pragiarism" method="post">
+                <button type="submit" class="check-btn btn btn-warning text-center pl-check-btn"
+                        th:text="#{action.check_for_piracy}"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="exp container">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-paperclip"></span>
+            <h5 th:text="#{label.how_to_use}"/>
+
+            <p>Nullam scelerisque, lorem in vulputate euismod, ipsum lectus posuere orci, nec egestas lacus
+                sapien quis dolor. Etiam diam magna, luctus eget convallis ac, pretium vel leo. </p>
+        </div>
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-lock"></span>
+            <h5 th:text="#{label.security}"/>
+
+            <p>Vestibulum at tellus sem. Sed imperdiet, mauris in porta consequat, odio metus viverra dui, a placerat
+                neque nulla eget diam. Nam nec sodales enim, ac bibendum diam.</p>
+        </div>
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-stats"></span>
+            <h5 th:text="#{label.statistics}"/>
+
+            <p>Mauris sagittis libero arcu, nec luctus ex imperdiet ut. Phasellus et malesuada massa. Phasellus
+                consequat non ligula sit amet consectetur. Mauris in mi luctus, ultrices nisl ut, lobortis sapien.</p>
+        </div>
+    </div>
+</div>
+</body>
 </html>

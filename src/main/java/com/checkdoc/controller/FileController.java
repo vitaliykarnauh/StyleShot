@@ -1,5 +1,6 @@
 package com.checkdoc.controller;
 
+import com.checkdoc.check.PlagiarismFinder;
 import com.checkdoc.check.Rule;
 import com.checkdoc.domain.Document;
 import com.checkdoc.domain.Mistake;
@@ -16,6 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,7 +40,11 @@ public class FileController {
     }
 
     @RequestMapping(value = "/file-upload", method = RequestMethod.POST)
-    public String uploadFile(@RequestParam(value = "file", required = false) MultipartFile file, Model model) {
+    public String uploadFile(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam(value = "file[]", required = false) Object file1, Model model) {
+        if (file1 != null) {
+            System.out.println("file1 ==> " + file1.getClass());
+        }
+        String message = "";
         if (file != null && !file.isEmpty()) {
             try {
                 Document document = FileUtil.process(file, directoryService, userService);
@@ -47,18 +53,27 @@ public class FileController {
                     System.out.println("New document is added to db.");
                     documentService.add(document);
                 } else {
-                    System.out.println("Document is taken from db.");
+                    System.out.println("Document is updated " + document);
+                    documentService.update(dbDocument);
                     document = dbDocument;
                 }
                 session().setAttribute("lastDocument", document);
+
+                Object lastDocs = session().getAttribute("docs");
+                List<Document> docs = new ArrayList<>();
+                docs.add(document);
+                if (lastDocs != null) {
+                    docs.addAll((List<Document>) lastDocs);
+                }
+                session().setAttribute("docs", docs);
+
                 System.out.println("You successfully uploaded " + file.getOriginalFilename() + "!");
                 model.addAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println(
-                        "You failed to upload " + file.getOriginalFilename() + " ==> " + (e.getMessage() != null ? e.getMessage() : ""));
-                model.addAttribute("message",
-                        "You failed to upload " + file.getOriginalFilename() + " ==> " + (e.getMessage() != null ? e.getMessage() : ""));
+                message = "You failed to upload " + file.getOriginalFilename() + " ==> " + (e.getMessage() != null ? e.getMessage() : "");
+                System.out.println(message);
+                model.addAttribute("message", message);
             }
         } else {
             System.out.println("File is empty.");
@@ -80,12 +95,12 @@ public class FileController {
             return "index";
         }
         int fontSize;
-        long indentSize;
+        long indentSize = 0;
         float lineSpacing = 0;
         try {
             fontSize = Integer.valueOf(fontSizeStr);
-            indentSize = Integer.valueOf(indentSizeStr);
-            lineSpacing = Float.valueOf(lineSpacingStr);
+            //indentSize = Integer.valueOf(indentSizeStr);
+            // lineSpacing = Float.valueOf(lineSpacingStr);
         } catch (NumberFormatException e) {
             System.out.println("String cannot be converted to number: " + e.getMessage());
             model.addAttribute("message", "String cannot be converted to number: " + e.getMessage());
@@ -103,8 +118,17 @@ public class FileController {
         return "result";
     }
 
-    @RequestMapping(value = "/pragiarism", method=RequestMethod.POST)
-    public String checkPragiarism(){
+    @RequestMapping(value = "/pragiarism", method = RequestMethod.POST)
+    public String checkPragiarism(Model model) {
+        List<Document> documents = (List<Document>)session().getAttribute("docs");
+        System.out.println("checking documents ==> " + documents);
+
+        PlagiarismFinder finder = new PlagiarismFinder(documents, mistakeService, mistakeTypeService);
+        List<Mistake> mistakes = finder.check();
+        System.out.println("Mistakes found #plagiarism ==> " + mistakes);
+        model.addAttribute("mistakes", mistakes);
+
+        session().setAttribute("docs", null);
         return "piracyresult";
     }
 }

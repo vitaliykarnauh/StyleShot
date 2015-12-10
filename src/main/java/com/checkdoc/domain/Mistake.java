@@ -105,7 +105,7 @@ public class Mistake {
 		result = 31 * result + getText().hashCode();
 		result = 31 * result + (getRow() != null ? getRow().hashCode() : 0);
 		result = 31 * result + getDocument().hashCode();
-		result = 31 * result + getMistakeType().hashCode();
+//		result = 31 * result + getMistakeType().hashCode();
 		return result;
 	}
 

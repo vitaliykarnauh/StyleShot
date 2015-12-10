@@ -10,6 +10,13 @@
 <body>
 
 <p th:text="@{hello}"/>
+<p th:text="#{label.create_account}">Создать аккаунт</p>
+<p th:text = "#{label.description}"/>
+
+<form action="/setLocale" method="post">
+    <input type="submit" value="Change"/>
+
+</form>
 
 <a href="/signup">Registration</a>
 <a href="/savetestuser">Try to save user</a>
