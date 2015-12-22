@@ -1,59 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>CheckDoc</title>
-		<meta charset='utf-8'/>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/main.css"/>
-		<script src="js/jquery-2.1.4.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-	</head>
-	<body>
-		<div id="header"></div>
-		<div class="greeting container">
-			<h1>Соответствие ГОСТам</h1>
-			<h3>Результаты проверки документа на ошибки</h3>
-			<br/><br/>
-		</div>
-		<div class="result-container container">
-			<div class="error-container">
-				<p>Неверные отступы</p>
-			</div>
-			<div class="text-container text-area readonly container">
-				<span th:each="mistake: ${mistakes}">
-					<span th:switch="${mistake.mistakeType.name}">
-						<span th:case="INTEND_SIZE_MISTAKE">
-							<p> Text ==> <span th:text="${mistake.text}"/></p>
-							<p> Mistake ==> <span th:text="${mistake.mistakeType.definition}"/></p>
-							<hr/>
-						</span>
-					</span>
-				</span>
-			</div>
-			<!--<div class="error-container">  Исправить вывод, если нет типа ошибки
-								<p>Кегель не по ГОСТу</p>
-			</div>
-			<div class="text-container text-area readonly container" style="font-size: 2em">
-							<span th:each="mistake: ${mistakes}">
-															<span th:switch="${mistake.mistakeType.name}">
-																				<span th:case="FONT_SIZE_MISTAKE">
-																			<p> Text ==> <span th:text="${mistake.text}"/></p>
-																			<p> Mistake ==> <span th:text="${mistake.mistakeType.definition}"/></p>
-																			<hr/>
-																				</span>
-											</span>
-										</span>
-			</div>-->
-			<!--	<div class="error-container">
-				<p>Межстрочные интервалы не полуторные</p>
-			</div>-->
-			<!--<div class="text-container text-area readonly container" style="line-height: 3em">-->
-			<!--Morbi non libero et metus sollicitudin tempus. Nam a lorem bibendum, vehicula sapien vel, viverra lectus. Nullam malesuada urna vitae sodales pharetra. Curabitur id nulla enim. Sed vestibulum ligula arcu. Aenean in maximus enim. Pellentesque sed quam nibh. Mauris consequat nisl ligula, sit amet interdum felis imperdiet et.-->
-			<!--</div>-->
-			<div class="error-container">
-				<p>Шрифт не тот</p>
-			</div>
-			<div class="text-container text-area readonly container" style="font-family: Arial">
+<head>
+    <title>StyleShot</title>
+    <meta charset='utf-8'/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<div class="greeting container">
+    <h1 th:text="#{label.gost_match}"/>
+
+    <h3 th:text="#{label.results}"/>
+    <br/><br/>
+</div>
+<div class="result-container container">
+    <!--<div class="error-container">-->
+    <!--<p th:text="#{label.mistake_indent}">Неверные отступы</p>-->
+    <!--</div>-->
+    <!--<div class="text-container text-area readonly container">-->
+    <!--<span th:each="mistake: ${mistakes}">-->
+    <!--<span th:switch="${mistake.mistakeType.name}">-->
+    <!--<span th:case="INTEND_SIZE_MISTAKE">-->
+    <!--<p> Text ==> <span th:text="${mistake.text}"/></p>-->
+    <!--<p> Mistake ==> <span th:text="${mistake.mistakeType.definition}"/></p>-->
+    <!--<hr/>-->
+    <!--</span>-->
+    <!--</span>-->
+    <!--</span>-->
+    <!--</div>-->
+        <span th:if="${#lists.isEmpty(mistakes)}">All good!</span>
+        <span th:if="!${#lists.isEmpty(mistakes)}">
+
+    <div class="error-container">
+        <p th:text="#{label.mistake_font_size}"/>
+    </div>
+    <div class="text-container text-area readonly container" style="font-size: 2em">
+                    <span th:each="mistake: ${mistakes}">
+                        <span th:switch="${mistake.mistakeType.name}">
+                                <span th:case="FONT_SIZE_MISTAKE">
+                                    <p> Text ==> <span th:text="${mistake.text}"/></p>
+                                    <p> Mistake ==> <span th:text="${mistake.mistakeType.definition}"/>
+                                    </p>
+                                    <hr/>
+                                </span>
+                        </span>
+                    </span>
+    </div>
+            <!--	<div class="error-container">
+                <p>Межстрочные интервалы не полуторные</p>
+            </div>-->
+            <!--<div class="text-container text-area readonly container" style="line-height: 3em">-->
+            <!--Morbi non libero et metus sollicitudin tempus. Nam a lorem bibendum, vehicula sapien vel, viverra lectus. Nullam malesuada urna vitae sodales pharetra. Curabitur id nulla enim. Sed vestibulum ligula arcu. Aenean in maximus enim. Pellentesque sed quam nibh. Mauris consequat nisl ligula, sit amet interdum felis imperdiet et.-->
+            <!--</div>-->
+    <div class="error-container">
+        <p th:text="#{label.mistake_font}"/>
+    </div>
+    <div class="text-container text-area readonly container" style="font-family: Arial">
 				<span th:each="mistake: ${mistakes}">
 					<span th:switch="${mistake.mistakeType.name}">
 						<span th:case="FONT_MISTAKE">
@@ -63,7 +68,8 @@
 						</span>
 					</span>
 				</span>
-			</div>
-		</div>
-	</body>
+    </div>
+    </span>
+</div>
+</body>
 </html>
