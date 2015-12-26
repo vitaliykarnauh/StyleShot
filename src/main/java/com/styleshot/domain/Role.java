@@ -26,6 +26,12 @@ public class Role {
     public Role() {
     }
 
+    public Role(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
     public Role(String name) {
         this.name = name;
     }
@@ -58,6 +64,7 @@ public class Role {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
 
     @Override
     public boolean equals(Object o) {

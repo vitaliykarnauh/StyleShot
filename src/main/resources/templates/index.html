@@ -19,9 +19,9 @@
 <body>
 <div id="header"></div>
 <div class="greeting container">
-    <h1 th:text="#{label.gost_match}"/>
+    <h1>Welcome to StyleShot application</h1>
 
-    <h3 th:text="#{label.description}"/>
+    <h3>This application helps you to improve your style or easily find outfit which you need</h3>
     <br/><br/>
 </div>
 <div class="upload-area container">
@@ -41,40 +41,17 @@
                   th:multiple="true">
             </form>
         </div>
-        <div class="col-md-3 col-md-offset-1 col-xs-12 well container">
-            <h4 th:text="#{label.parameters}"/>
-            <br/>
-            <h5 th:text="#{label.font}"/>
+        <div class="col-md-3 col-md-offset-2 col-xs-12 exp container">
+                <span class="glyphicon glyphicon-search text-center"></span>
 
-            <form action="/process" method="post">
-                <select name="font" class='form-control font-t'>
-                    <option value='tnr'>Times New Roman</option>
-                    <option value='arial'>Arial</option>
-                </select>
-                <br/>
-                <h5 title="Размер шрифта" th:text="#{label.font_size}"/>
-                <input name="fontSize" type="number" class="form-control font-s" value="14"/>
-                <br/>
-                <button type="submit" class="check-btn btn btn-primary text-center error-check-btn"
-                        th:text="#{action.check_mistakes}"/>
-            </form>
-            <hr/>
-            <form action="/pragiarism" method="post">
-                <button type="submit" class="check-btn btn btn-warning text-center pl-check-btn"
-                        th:text="#{action.check_for_piracy}"/>
-            </form>
+                <p>This application can simply find outfit by uploaded photo.<br/>
+                    It's analyze by expert and he provides as much information as you want ! </p>
         </div>
     </div>
 </div>
 <div class="exp container">
     <div class="row text-center">
-        <div class="col-md-4">
-            <span class="glyphicon glyphicon-paperclip"></span>
-            <h5 th:text="#{label.how_to_use}"/>
 
-            <p>Nullam scelerisque, lorem in vulputate euismod, ipsum lectus posuere orci, nec egestas lacus
-                sapien quis dolor. Etiam diam magna, luctus eget convallis ac, pretium vel leo. </p>
-        </div>
         <div class="col-md-4">
             <span class="glyphicon glyphicon-lock"></span>
             <h5 th:text="#{label.security}"/>

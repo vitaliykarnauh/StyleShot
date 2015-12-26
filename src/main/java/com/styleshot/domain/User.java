@@ -4,6 +4,7 @@ package com.styleshot.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "USER")
 @Table(name = "USER")
@@ -21,20 +22,15 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Column(name = "PASSWORD")
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ROLE_ID")
     private Role role;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<UserLinks> userLinks;
 
 
     public User() {
@@ -45,6 +41,15 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.role = role;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public long getId() {
@@ -79,6 +84,20 @@ public class User {
         this.role = role;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<UserLinks> getUserLinks() {
+        return userLinks;
+    }
+
+    public void setUserLinks(List<UserLinks> userLinks) {
+        this.userLinks = userLinks;
+    }
+
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -112,4 +131,6 @@ public class User {
                 ", id=" + id +
                 '}';
     }
+
+
 }

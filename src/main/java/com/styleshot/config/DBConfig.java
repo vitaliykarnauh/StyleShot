@@ -47,7 +47,6 @@ public class DBConfig {
 
     @Autowired
     @Bean(name = "hibernateTemplate")
-    @Scope(WebApplicationContext.SCOPE_REQUEST)
     public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory) {
         return new HibernateTemplate(sessionFactory);
     }
@@ -76,7 +75,6 @@ public class DBConfig {
 
     @Autowired
     @Bean(name = "transactionManager")
-    @Scope(WebApplicationContext.SCOPE_REQUEST)
     public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
         hibernateTransactionManager.setSessionFactory(sessionFactory);

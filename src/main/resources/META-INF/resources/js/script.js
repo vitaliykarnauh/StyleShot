@@ -14,11 +14,11 @@ $(document).ready(function (){
     	partials = $full_path.split('\\');
 		$file_name = partials[partials.length - 1];
 		extension = $file_name.split('\.').slice(-1)[0];
-		if (extension != 'docx') {
-			showExtError();
-		} else {
+		//if (extension != 'docx') {
+		//	showExtError();
+		//} else {
 			everythingIsFine($file_name);
-		}
+		//}
     });
 
 	var count;
@@ -27,15 +27,15 @@ $(document).ready(function (){
 		accept: function(file, done) {
             count = this.files.length;
             console.log(count);
-			if (file.name.split('\.').slice(-1)[0] != 'docx') {
-				// alert(file.type);
-				this.removeFile(file);
-				count--;
-				showExtError();
-			} else {
+			//if (file.name.split('\.').slice(-1)[0] != 'docx') {
+				alert(file.type);
+				//this.removeFile(file);
+				//count--;
+				//showExtError();
+			//} else {
 				done();
 				everythingIsFine();
-			}
+			//}
 			if (count == 1) {
 				$(".pl-check-btn").prop('disabled', true);
 				$(".font-t").prop('disabled', false);

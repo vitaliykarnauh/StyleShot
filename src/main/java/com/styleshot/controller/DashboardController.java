@@ -1,6 +1,7 @@
 package com.styleshot.controller;
 
 
+import com.styleshot.constant.RoleEnum;
 import com.styleshot.domain.User;
 import com.styleshot.exception.IncorrectPasswordException;
 import com.styleshot.service.UserService;
@@ -17,7 +18,7 @@ public class DashboardController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = {"/", "/dashboard"})
+    @RequestMapping(value = {"/", "/dashboard"}, method = RequestMethod.GET)
     public String redirectToDashboard(Model model) {
         String hello = "hello";
         model.addAttribute("hello", hello);
@@ -45,16 +46,18 @@ public class DashboardController {
         } catch (IncorrectPasswordException e) {
             return "register";
         }
-        return "dashboard";
+        return "userpage";
     }
 
-    @RequestMapping(value = {"/login"})
+    @RequestMapping(value = {"/login"} , method = RequestMethod.POST)
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
         User user = userService.login(email, password);
         if (user == null) {
-            return "dashboard";
+            return "index";
         }
-        model.addAttribute("user",user);
-        return "mypage";
+
+        String result = user.getRole().getName().equals(RoleEnum.EXPERT.getRoleName()) ? "expertpage" : "userpage";
+        model.addAttribute("user", user);
+        return result;
     }
 }

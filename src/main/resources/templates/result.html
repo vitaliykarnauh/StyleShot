@@ -17,20 +17,6 @@
     <br/><br/>
 </div>
 <div class="result-container container">
-    <!--<div class="error-container">-->
-    <!--<p th:text="#{label.mistake_indent}">Неверные отступы</p>-->
-    <!--</div>-->
-    <!--<div class="text-container text-area readonly container">-->
-    <!--<span th:each="mistake: ${mistakes}">-->
-    <!--<span th:switch="${mistake.mistakeType.name}">-->
-    <!--<span th:case="INTEND_SIZE_MISTAKE">-->
-    <!--<p> Text ==> <span th:text="${mistake.text}"/></p>-->
-    <!--<p> Mistake ==> <span th:text="${mistake.mistakeType.definition}"/></p>-->
-    <!--<hr/>-->
-    <!--</span>-->
-    <!--</span>-->
-    <!--</span>-->
-    <!--</div>-->
         <span th:if="${#lists.isEmpty(mistakes)}">All good!</span>
         <span th:if="!${#lists.isEmpty(mistakes)}">
 
@@ -49,12 +35,6 @@
                         </span>
                     </span>
     </div>
-            <!--	<div class="error-container">
-                <p>Межстрочные интервалы не полуторные</p>
-            </div>-->
-            <!--<div class="text-container text-area readonly container" style="line-height: 3em">-->
-            <!--Morbi non libero et metus sollicitudin tempus. Nam a lorem bibendum, vehicula sapien vel, viverra lectus. Nullam malesuada urna vitae sodales pharetra. Curabitur id nulla enim. Sed vestibulum ligula arcu. Aenean in maximus enim. Pellentesque sed quam nibh. Mauris consequat nisl ligula, sit amet interdum felis imperdiet et.-->
-            <!--</div>-->
     <div class="error-container">
         <p th:text="#{label.mistake_font}"/>
     </div>
