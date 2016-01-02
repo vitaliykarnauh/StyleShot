@@ -1,6 +1,8 @@
 package com.styleshot.domain;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity(name = "USER_LINKS")
@@ -8,56 +10,56 @@ import javax.persistence.*;
 public class UserLinks {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "identity")
+    @GenericGenerator(name = "identity", strategy = "identity")
     @Column(name = "LINK_ID", unique = true, nullable = false)
-    private Long id;
+    private Long linkId;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "USER_ID")
-    private Long userId;
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID",  nullable = false)
+    private User user;
 
-    @Column(name = "LINK")
+    @Column(name = "FILE_NAME")
     @Lob
-    private String link;
+    private String fileName;
 
     @Column(name = "VIEWED")
     private boolean isViewed;
 
 
+
     public UserLinks() {
     }
 
-
-    public UserLinks(Long userId, String link, boolean isViewed) {
-        this.userId = userId;
-        this.link = link;
+    public UserLinks(User user, String fileName, boolean isViewed) {
+        this.user = user;
+        this.fileName = fileName;
         this.isViewed = isViewed;
     }
 
-
-    public Long getId() {
-        return id;
+    public Long getLinkId() {
+        return linkId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getUser() {
+        return user;
     }
 
-    public Long getUserId() {
-        return userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setLinkId(Long linkId) {
+        this.linkId = linkId;
     }
 
-    public String getLink() {
-        return link;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public boolean isViewed() {
@@ -67,40 +69,4 @@ public class UserLinks {
     public void setViewed(boolean isViewed) {
         this.isViewed = isViewed;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserLinks userLinks = (UserLinks) o;
-
-        if (isViewed != userLinks.isViewed) return false;
-        if (id != null ? !id.equals(userLinks.id) : userLinks.id != null) return false;
-        if (link != null ? !link.equals(userLinks.link) : userLinks.link != null) return false;
-        if (userId != null ? !userId.equals(userLinks.userId) : userLinks.userId != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (link != null ? link.hashCode() : 0);
-        result = 31 * result + (isViewed ? 1 : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "UserLinks{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", link='" + link + '\'' +
-                ", isViewed=" + isViewed +
-                '}';
-    }
-
-
 }

@@ -29,7 +29,7 @@ public class User {
     @JoinColumn(name = "ROLE_ID")
     private Role role;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch =FetchType.EAGER)
     private List<UserLinks> userLinks;
 
 
@@ -44,16 +44,12 @@ public class User {
     }
 
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -72,8 +68,12 @@ public class User {
         this.email = email;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Role getRole() {
@@ -84,10 +84,6 @@ public class User {
         this.role = role;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public List<UserLinks> getUserLinks() {
         return userLinks;
     }
@@ -95,42 +91,4 @@ public class User {
     public void setUserLinks(List<UserLinks> userLinks) {
         this.userLinks = userLinks;
     }
-
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (getId() != user.getId()) return false;
-        if (!getUserName().equals(user.getUserName())) return false;
-        if (!getEmail().equals(user.getEmail())) return false;
-        return getRole().equals(user.getRole());
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getUserName().hashCode();
-        result = 31 * result + getEmail().hashCode();
-        result = 31 * result + getRole().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                ", role=" + role +
-                ", email='" + email + '\'' +
-                ", userName='" + userName + '\'' +
-                ", id=" + id +
-                '}';
-    }
-
-
 }

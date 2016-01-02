@@ -15,56 +15,61 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/script.js"></script>
+    
+    <style>
+        
+        .maindiv {
+            background-image: url("images/beckham.jpg");
+            background-size: 100%;
+            color : #ffffff;
+        }
+    </style>
+    
 </head>
 <body>
 <div id="header"></div>
-<div class="greeting container">
-    <h1>Welcome to StyleShot application</h1>
-
-    <h3>This application helps you to improve your style or easily find outfit which you need</h3>
-    <br/><br/>
-</div>
-<div class="upload-area container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="error-div">
-                <span th:text="#{error.extension}"/>
+<div class="maindiv">
+    <div class="greeting container">
+        <h1>Welcome to StyleShot application</h1>
+        <h3>This application helps you to improve your style or easily find outfit which you need</h3>
+        <br/><br/>
+    </div>
+    <div class="upload-area container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="error-div">
+                    <span th:text="#{error.extension}"/>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 col-xs-12">
-            <!-- Drop Zone -->
-            <form action="file-upload"
-                  class="dropzone "
-                  id="filesdropzone"
-                  th:multiple="true">
-            </form>
-        </div>
-        <div class="col-md-3 col-md-offset-2 col-xs-12 exp container">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-2 col-xs-12 exp container">
                 <span class="glyphicon glyphicon-search text-center"></span>
 
                 <p>This application can simply find outfit by uploaded photo.<br/>
                     It's analyze by expert and he provides as much information as you want ! </p>
+            </div>
         </div>
     </div>
-</div>
-<div class="exp container">
-    <div class="row text-center">
+    <div class="exp container">
+        <div class="row text-center">
 
-        <div class="col-md-4">
-            <span class="glyphicon glyphicon-lock"></span>
-            <h5 th:text="#{label.security}"/>
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-lock"></span>
+                <h5 th:text="#{label.security}"/>
 
-            <p>Vestibulum at tellus sem. Sed imperdiet, mauris in porta consequat, odio metus viverra dui, a placerat
-                neque nulla eget diam. Nam nec sodales enim, ac bibendum diam.</p>
-        </div>
-        <div class="col-md-4">
-            <span class="glyphicon glyphicon-stats"></span>
-            <h5 th:text="#{label.statistics}"/>
+                <p>Vestibulum at tellus sem. Sed imperdiet, mauris in porta consequat, odio metus viverra dui, a
+                    placerat
+                    neque nulla eget diam. Nam nec sodales enim, ac bibendum diam.</p>
+            </div>
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-stats"></span>
+                <h5 th:text="#{label.statistics}"/>
 
-            <p>Mauris sagittis libero arcu, nec luctus ex imperdiet ut. Phasellus et malesuada massa. Phasellus
-                consequat non ligula sit amet consectetur. Mauris in mi luctus, ultrices nisl ut, lobortis sapien.</p>
+                <p>Mauris sagittis libero arcu, nec luctus ex imperdiet ut. Phasellus et malesuada massa. Phasellus
+                    consequat non ligula sit amet consectetur. Mauris in mi luctus, ultrices nisl ut, lobortis
+                    sapien.</p>
+            </div>
         </div>
     </div>
 </div>

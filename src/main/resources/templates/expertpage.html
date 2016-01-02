@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>StyleShot</title>
+    <meta charset='utf-8'/>
+    <!-- ../META-INF/resources/ -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/css/dropzone.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'/>
+    <script src="/js/jquery-2.1.4.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>-->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/dropzone.js"></script>
+    <script src="/js/script.js"></script>
+</head>
+<body>
+<!--<div id="header"></div>-->
+<header class='navbar navbar-default navbar-fixed-top'>
+    <div class="container header-container">
+        <a class='navbar-brand'><span class='mt'>StyleShot</span></a>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <p class="navbar-text" th:text="'Hi,' + ${user.userName}"/>
+            </li>
+            <li>
+                <a th:href="@{/}" th:text="Logout"/>
+            </li>
+        </ul>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="error-div">
+                <span th:text="#{error.extension}"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!--this-->
+        <div class="col-md-8 col-xs-12 col-lg-8r">
+            <img class="center-block" th:src="${imagePath}"/>
+        </div>
+        <div class="col-md-4">
+
+            <form action="">
+                <label for="mark">Mark Name</label>
+                <input type="text" class="form-control" id="mark" placeholder="Tommy Hilfiger"/>
+
+                <label for="color">Color</label>
+                <input type="text" class="form-control" id="color" placeholder="Yellow"/>
+
+                <label for="type">Type</label>
+                <input type="text" class="form-control" id="type" placeholder="Sneakers"/>
+
+                <a href="#" class="btn btn-primary">Ignore</a>
+                <a href="#" class="btn btn-primary" target="_blank">Find by criteria</a>
+            </form>
+
+            <br/>
+
+            <form th:action="'/expert/result/' + ${userId}" method="post">
+
+
+                <input type="text" name="imageName" th:value="${imageName}" hidden="true"/>
+                <input type="text" name="expertId" th:value="${user.id}" hidden="true"/>
+
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" id="description" rows="5" placeholder="Description">
+                </textarea>
+
+                <label for="links">Type</label>
+                <textarea name="links" class="form-control" id="links" rows="5" placeholder="Links">
+                </textarea>
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#header").load("html/userheader.html");
+</script>
+</body>
+</html>

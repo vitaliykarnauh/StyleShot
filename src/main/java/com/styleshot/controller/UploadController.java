@@ -1,5 +1,10 @@
 package com.styleshot.controller;
 
+import com.styleshot.domain.User;
+import com.styleshot.domain.UserLinks;
+import com.styleshot.service.UserLinksService;
+import com.styleshot.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +25,15 @@ import java.io.FileOutputStream;
 public class UploadController {
 
 
-    private final static String BASE_URL = "images/";
+    private final static String BASE_URL = "src/main/resources/META-INF/resources/images/";
     private final static String MESSAGE_ATTR = "message";
+
+    @Autowired
+    public UserLinksService userLinksService;
+
+    @Autowired
+    public UserService userService;
+
 
     @RequestMapping(value = "/file-upload", method = RequestMethod.POST)
     public String loadImage(@RequestParam(value = "file", required = false) MultipartFile file,
@@ -41,8 +53,9 @@ public class UploadController {
                         new BufferedOutputStream(new FileOutputStream(new File(BASE_URL + userId + "/" + file.getOriginalFilename())));
                 stream.write(bytes);
                 stream.close();
-
-
+                User fetchedUserById = userService.findUserById(Long.parseLong(userId));
+                UserLinks userLink = new UserLinks(fetchedUserById, file.getOriginalFilename(), false);
+                userLinksService.add(userLink);
                 model.addAttribute(MESSAGE_ATTR, "You successfully uploaded " + name + "!");
             } catch (Exception e) {
                 model.addAttribute(MESSAGE_ATTR, "You failed to upload " + name + " => " + e.getMessage());
@@ -50,6 +63,7 @@ public class UploadController {
         } else {
             model.addAttribute(MESSAGE_ATTR, "You failed to upload " + name + " because the file was empty.");
         }
+        model.addAttribute("userId", userId);
         return "userpage";
     }
 }

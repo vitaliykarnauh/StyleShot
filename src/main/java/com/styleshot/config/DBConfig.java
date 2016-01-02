@@ -2,12 +2,16 @@ package com.styleshot.config;
 
 import com.styleshot.dao.RoleDao;
 import com.styleshot.dao.UserDao;
+import com.styleshot.dao.UserLinksDao;
 import com.styleshot.dao.impl.RoleDaoImpl;
 import com.styleshot.dao.impl.UserDaoImpl;
+import com.styleshot.dao.impl.UserLinksDaoImpl;
 import com.styleshot.domain.User;
 import com.styleshot.service.RoleService;
+import com.styleshot.service.UserLinksService;
 import com.styleshot.service.UserService;
 import com.styleshot.service.impl.RoleServiceImpl;
+import com.styleshot.service.impl.UserLinksServiceImpl;
 import com.styleshot.service.impl.UserServiceImpl;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -82,6 +86,12 @@ public class DBConfig {
     }
 
 
+    @Bean(name = "userLinksDao")
+    public UserLinksDao getUserLinksDao() {
+        return new UserLinksDaoImpl();
+    }
+
+
     @Bean(name = "userDao")
     public UserDao getUserDao() {
         return new UserDaoImpl();
@@ -101,6 +111,11 @@ public class DBConfig {
     @Bean(name = "roleService")
     public RoleService getRoleService() {
         return new RoleServiceImpl();
+    }
+
+    @Bean(name = "userLinksService")
+    public UserLinksService getUserLinksService() {
+        return new UserLinksServiceImpl();
     }
 
 }

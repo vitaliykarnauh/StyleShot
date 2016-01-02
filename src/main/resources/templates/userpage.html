@@ -23,7 +23,7 @@
         <a class='navbar-brand'><span class='mt'>StyleShot</span></a>
         <ul class="nav navbar-nav navbar-right">
             <li class='dropdown pull-right'>
-                <span class='login-span'>Hi, <span th:text="${user.userName}"/></span>
+                <span style="float: left" class='login-span' th:text="'Hi,' + ${user.userName}"/>
                 <a class="btn" th:href="@{/}">Logout</a>
             </li>
         </ul>
@@ -54,8 +54,5 @@
     </div>
 </div>
 
-<script>
-    $("#header").load("html/userheader.html");
-</script>
 </body>
 </html>
