@@ -22,9 +22,11 @@
     <div class="container header-container">
         <a class='navbar-brand'><span class='mt'>StyleShot</span></a>
         <ul class="nav navbar-nav navbar-right">
-            <li class='dropdown pull-right'>
-                <span style="float: left" class='login-span' th:text="'Hi,' + ${user.userName}"/>
-                <a class="btn" th:href="@{/}">Logout</a>
+            <li>
+                <span  class="navbar-text" th:text="'Hi,' + ${user.userName}"/>
+            </li>
+            <li>
+                <a style="color: #ffffff" class="btn btn-primary" th:href="@{/}">Logout</a>
             </li>
         </ul>
     </div>
@@ -50,6 +52,13 @@
                   th:multiple="true">
                 <input type="text" name="userId" th:value="${user.id}" hidden="true"/>
             </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-lg-4">
+
+
+
         </div>
     </div>
 </div>

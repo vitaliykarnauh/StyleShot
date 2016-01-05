@@ -15,22 +15,25 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/script.js"></script>
-    
+
     <style>
-        
+
         .maindiv {
-            background-image: url("images/beckham.jpg");
+            background-image: url("images/tommy.jpg");
             background-size: 100%;
-            color : #ffffff;
+            height: 730px;
+            color: #000000;
         }
     </style>
-    
+
 </head>
-<body>
-<div id="header"></div>
+<body style="padding-top: 90px !important;">
+<div id="header" style="margin-bottom: 0 !important;"></div>
 <div class="maindiv">
-    <div class="greeting container">
+    <div class="greeting container" style="padding-top: 105px; font-weight: bold;
+    color: black;">
         <h1>Welcome to StyleShot application</h1>
+
         <h3>This application helps you to improve your style or easily find outfit which you need</h3>
         <br/><br/>
     </div>
@@ -42,34 +45,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 col-md-offset-2 col-xs-12 exp container">
-                <span class="glyphicon glyphicon-search text-center"></span>
-
-                <p>This application can simply find outfit by uploaded photo.<br/>
-                    It's analyze by expert and he provides as much information as you want ! </p>
-            </div>
-        </div>
     </div>
     <div class="exp container">
         <div class="row text-center">
 
-            <div class="col-md-4">
-                <span class="glyphicon glyphicon-lock"></span>
-                <h5 th:text="#{label.security}"/>
-
-                <p>Vestibulum at tellus sem. Sed imperdiet, mauris in porta consequat, odio metus viverra dui, a
-                    placerat
-                    neque nulla eget diam. Nam nec sodales enim, ac bibendum diam.</p>
-            </div>
-            <div class="col-md-4">
-                <span class="glyphicon glyphicon-stats"></span>
-                <h5 th:text="#{label.statistics}"/>
-
-                <p>Mauris sagittis libero arcu, nec luctus ex imperdiet ut. Phasellus et malesuada massa. Phasellus
-                    consequat non ligula sit amet consectetur. Mauris in mi luctus, ultrices nisl ut, lobortis
-                    sapien.</p>
-            </div>
         </div>
     </div>
 </div>

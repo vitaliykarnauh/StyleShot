@@ -1,6 +1,7 @@
 package com.styleshot.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public class UserLinks {
 
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID",  nullable = false)
+    @JoinColumn(name = "USER_ID",  nullable = true)
+    @JsonIgnore
     private User user;
 
     @Column(name = "FILE_NAME")

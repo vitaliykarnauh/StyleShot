@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan("com.styleshot.controller")
+@ComponentScan({"com.styleshot.controller", "com.styleshot.restcontroller"})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
 

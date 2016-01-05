@@ -1,6 +1,8 @@
 package com.styleshot.domain;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,15 +31,19 @@ public class User {
     @JoinColumn(name = "ROLE_ID")
     private Role role;
 
-    @OneToMany(mappedBy = "user", fetch =FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserLinks> userLinks;
+
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<UserResults> userResults;
 
 
     public User() {
     }
 
     public User(String userName, String email, Role role) {
-
         this.userName = userName;
         this.email = email;
         this.role = role;
@@ -90,5 +96,13 @@ public class User {
 
     public void setUserLinks(List<UserLinks> userLinks) {
         this.userLinks = userLinks;
+    }
+
+    public List<UserResults> getUserResults() {
+        return userResults;
+    }
+
+    public void setUserResults(List<UserResults> userResults) {
+        this.userResults = userResults;
     }
 }
