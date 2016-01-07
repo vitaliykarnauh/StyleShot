@@ -6,7 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Entity(name = "USER_LINKS")
+@Entity
 @Table(name = "USER_LINKS")
 public class UserLinks {
 
@@ -29,6 +29,10 @@ public class UserLinks {
     @Column(name = "VIEWED")
     private boolean isViewed;
 
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userLinks", cascade = CascadeType.ALL)
+    @JsonIgnore
+    public UserResults userResults;
 
 
     public UserLinks() {
@@ -70,5 +74,13 @@ public class UserLinks {
 
     public void setViewed(boolean isViewed) {
         this.isViewed = isViewed;
+    }
+
+    public UserResults getUserResults() {
+        return userResults;
+    }
+
+    public void setUserResults(UserResults userResults) {
+        this.userResults = userResults;
     }
 }

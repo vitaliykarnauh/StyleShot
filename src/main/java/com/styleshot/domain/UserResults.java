@@ -38,9 +38,13 @@ public class UserResults {
 
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID",  nullable = true)
+    @JoinColumn(name = "USER_ID", nullable = true)
     @JsonIgnore
     private User user;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "LINK_ID")
+    private UserLinks userLinks;
 
 
     public Long getResultId() {
@@ -73,5 +77,13 @@ public class UserResults {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public UserLinks getUserLinks() {
+        return userLinks;
+    }
+
+    public void setUserLinks(UserLinks userLinks) {
+        this.userLinks = userLinks;
     }
 }

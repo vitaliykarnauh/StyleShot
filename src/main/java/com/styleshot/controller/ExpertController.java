@@ -86,6 +86,8 @@ public class ExpertController {
         return REDIRECT_EXPERT_PAGE;
     }
 
+
+
     private synchronized String getImagePath(UserLinks userLink) {
         String pathToImage = IMAGES + userLink.getUser().getId() + "/" + userLink.getFileName();
         return pathToImage;
@@ -113,6 +115,7 @@ public class ExpertController {
         if (userLink == null) {
             return false;
         }
+        userResult.setUserLinks(userLink);
         userResultsService.add(userResult);
         userLink.setViewed(true);
         userLinksService.update(userLink);

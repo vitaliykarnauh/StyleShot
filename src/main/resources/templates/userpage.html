@@ -6,15 +6,34 @@
     <!-- ../META-INF/resources/ -->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">-->
     <link rel="stylesheet" href="/css/dropzone.css" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/main.css" type="text/css"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600&amp;subset=latin,cyrillic'
           rel='stylesheet' type='text/css'/>
+
+
     <script src="/js/jquery-2.1.4.js"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/dropzone.js"></script>
     <script src="/js/script.js"></script>
+
+
+    <style>
+
+
+
+        .navbar-nav>li>a {
+            padding-top: 9px;
+            margin-top: 7px;
+        }
+
+
+    </style>
+
+
 </head>
 <body>
 <!--<div id="header"></div>-->
@@ -23,7 +42,7 @@
         <a class='navbar-brand'><span class='mt'>StyleShot</span></a>
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <span  class="navbar-text" th:text="'Hi,' + ${user.userName}"/>
+                <span class="navbar-text" th:text="'Hi,' + ${user.userName}"/>
             </li>
             <li>
                 <a style="color: #ffffff" class="btn btn-primary" th:href="@{/}">Logout</a>
@@ -53,14 +72,207 @@
                 <input type="text" name="userId" th:value="${user.id}" hidden="true"/>
             </form>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-lg-4">
+        <div class="col-lg-4 col-md-4">
+            <div class="row" style="margin-bottom:5px;margin-top:0">
+                <div class="col-lg-6" style="height:240px;overflow:hidden;padding:5px">
+                    <div class="card">
+                        <div class="card-image">
+                            <a class="modal-trigger" href="#modal1">
+                                <div class="userUpload"
+                                     style="height:160px;background:url(https://thefashiontag.files.wordpress.com/2013/09/street-style-men-coat-1.jpg);background-size: cover">
+                                    <img id="first"
+                                         src="http://plainicon.com/dboard/userprod/2728_f69a3/prod_thumb/plainicon.com-54418-256px-51c.png"
+                                         style="width:30px;height:30px;"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-action">
+                        <span class="card-title"
+                              style="font-size:14px;text-transform: uppercase;font-weight:bold;color:#D77D00">It's a title</span>
+                        </div>
+                    </div>
+
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="height:240px;overflow:hidden;padding:5px">
+                    <div class="card">
+                        <div class="card-image">
+                            <a class="modal-trigger" href="#modal2">
+                                <div class="userUpload"
+                                     style="height:160px;background:url(http://lightaholic.com/wp-content/uploads/2013/02/images_2013_Februarie_Street%20Style%20Men%20Bucharest.jpg);background-size: cover">
+                                    <img src="http://plainicon.com/dboard/userprod/2728_f69a3/prod_thumb/plainicon.com-54418-256px-51c.png"
+                                         style="width:30px;height:30px;"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-action">
+                        <span class="card-title"
+                              style="font-size:14px;text-transform: uppercase;font-weight:bold;color:#D77D00">It's a title</span>
+                        </div>
+                    </div>
+
+                    <div id="modal2" class="modal">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:5px;margin-top:0">
+                <div class="col-lg-6" style="height:240px;overflow:hidden;padding:5px">
+                    <div class="card">
+                        <div class="card-image">
+                            <a class="modal-trigger" href="#modal3">
+                                <div class="userUpload"
+                                     style="height:160px;background:url(http://www.soletopia.com/wp-content/uploads/2012/09/don-draper-mad-men-style-guide.jpg);background-size: cover">
+                                    <img src="http://plainicon.com/dboard/userprod/2728_f69a3/prod_thumb/plainicon.com-54418-256px-51c.png"
+                                         style="width:30px;height:30px;"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-action">
+                        <span class="card-title"
+                              style="font-size:14px;text-transform: uppercase;font-weight:bold;color:#D77D00">It's a title</span>
+                        </div>
+                    </div>
+
+                    <div id="modal3" class="modal">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="height:240px;overflow:hidden;padding:5px">
+                    <div class="card">
+                        <div class="card-image">
+                            <a class="modal-trigger" href="#modal4">
+                                <div class="userUpload"
+                                     style="height:160px;background:url(http://thefashiontag.com/wp-content/uploads/2015/01/lumbersexual-style-men-2015.jpg);background-size: cover">
+                                    <img src="http://plainicon.com/dboard/userprod/2728_f69a3/prod_thumb/plainicon.com-54418-256px-51c.png"
+                                         style="width:30px;height:30px;"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-action">
+                        <span class="card-title"
+                              style="font-size:14px;text-transform: uppercase;font-weight:bold;color:#D77D00">It's a title</span>
+                        </div>
+                    </div>
+
+                    <div id="modal4" class="modal">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:5px;margin-top:0">
+                <div class="col-lg-6" style="height:240px;overflow:hidden;padding:5px">
+                    <div class="card">
+                        <div class="card-image">
+                            <a class="modal-trigger" href="#modal5">
+                                <div class="userUpload"
+                                     style="height:160px;background:url(http://photos.essence.com/sites/default/files/images/2011/09/958473-men_of_style.jpg);background-size: cover">
+                                    <img src="http://plainicon.com/dboard/userprod/2728_f69a3/prod_thumb/plainicon.com-54418-256px-51c.png"
+                                         style="width:30px;height:30px;"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-action">
+                        <span class="card-title"
+                              style="font-size:14px;text-transform: uppercase;font-weight:bold;color:#D77D00">It's a title</span>
+                        </div>
+                    </div>
+
+                    <div id="modal5" class="modal">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="height:240px;overflow:hidden;padding:5px">
+                    <div class="card">
+                        <div class="card-image">
+                            <a class="modal-trigger" href="#modal6">
+                                <div class="userUpload"
+                                     style="height:160px;background:url(http://www.designsnext.com/wp-content/uploads/2014/01/Bohemian-Style-for-Men-5.jpg);background-size: cover">
+                                    <img src="http://plainicon.com/dboard/userprod/2728_f69a3/prod_thumb/plainicon.com-54418-256px-51c.png"
+                                         style="width:30px;height:30px;"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-action">
+                        <span class="card-title"
+                              style="font-size:14px;text-transform: uppercase;font-weight:bold;color:#D77D00">It's a title</span>
+                        </div>
+                    </div>
+
+                    <div id="modal6" class="modal">
+                        <div class="modal-content">
+                            <h4>Modal Header</h4>
+
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
+            <style>
 
+                .userUpload:hover {
+                    opacity: 0.7;
+                }
+
+            </style>
+
+            <script>
+                $(function () {
+
+                    $('.modal-trigger').leanModal();
+
+                    function toggleGreenMark(element) {
+                        element.toggle();
+                    }
+
+                });
+            </script>
         </div>
     </div>
+
+
 </div>
 
 </body>

@@ -1,10 +1,10 @@
 package com.styleshot.restcontroller;
 
 
-import com.styleshot.domain.User;
-import com.styleshot.domain.UserLinks;
 import com.styleshot.service.UserLinksService;
 import com.styleshot.service.UserService;
+import com.styleshot.upload.UploadUtils;
+import net.arnx.wmf2svg.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,9 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
+import javax.imageio.ImageIO;
+import javax.websocket.server.PathParam;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/rest/exchange")
@@ -31,34 +35,46 @@ public class ExchangeRestController {
     private UserLinksService userLinksService;
 
     @RequestMapping(value = "/fileupload", method = RequestMethod.POST)
+    public
     @ResponseBody
-    public ResponseEntity<Void> loadImage(@RequestParam(value = "file", required = false) MultipartFile file,
-                                          @RequestParam(value = "userId", required = false) String userId) {
-
-        String name = "";
-        if (!file.isEmpty()) {
-            try {
-                File folderForUser = new File(BASE_URL + userId);
-                if (!folderForUser.exists()) {
-                    folderForUser.mkdir();
-                }
-                byte[] bytes = file.getBytes();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(BASE_URL + userId + "/" + file.getOriginalFilename())));
-                stream.write(bytes);
-                stream.close();
-                User fetchedUserById = userService.findUserById(Long.parseLong(userId));
-                UserLinks userLink = new UserLinks(fetchedUserById, file.getOriginalFilename(), false);
-                userLinksService.add(userLink);
+    ResponseEntity<Void> loadImage(@RequestParam(value = "file", required = false) MultipartFile file,
+                                   @RequestParam(value = "userId", required = false) Long userId) {
 
 
-            } catch (Exception e) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        try {
+            boolean isUploaded = UploadUtils.uploadImage(file, userId, userService, userLinksService);
 
+            if (isUploaded) {
+                httpHeaders.add("isUploaded", "true");
+                return new ResponseEntity<Void>(httpHeaders, HttpStatus.ACCEPTED);
+            } else {
+                httpHeaders.add("isUploaded", "false");
+                return new ResponseEntity<Void>(httpHeaders, HttpStatus.BAD_REQUEST);
             }
-        } else {
-
+        } catch (Exception e) {
+            httpHeaders.add("isUploaded", "false");
+            return new ResponseEntity<Void>(httpHeaders, HttpStatus.BAD_REQUEST);
         }
+    }
 
-        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.CREATED);
+
+    @RequestMapping(value = "/images/{userId}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String getImagesForUser(@PathVariable Long userId, @PathParam("imageName") String imageName) throws Exception {
+        return Base64.encode(getImagebyName(imageName, userId));
+    }
+
+
+    private byte[] getImagebyName(String imageName, Long userId) throws IOException {
+
+        File imgPath = new File(BASE_URL + userId + "/" + imageName);
+        BufferedImage bufferedImage = ImageIO.read(imgPath);
+
+        WritableRaster raster = bufferedImage.getRaster();
+        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
+
+        return data.getData();
+
     }
 }
